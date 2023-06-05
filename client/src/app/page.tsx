@@ -1,7 +1,7 @@
-import Link from "next/link";
+import Header from "@/components/Header";
 
 const Home = () => {
-	return <Link href={"/another-page"}>Another Page</Link>;
+	return <></>;
 };
 
 export default Home;

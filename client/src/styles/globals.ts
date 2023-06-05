@@ -7,10 +7,9 @@ export const GlobalCSS = createGlobalStyle`
 
   box-sizing: border-box;
 
-  font-family: 'Montserrat', sans-serif;
-
+  
   text-decoration: none;
-
+  
   list-style: none;
 }
 
@@ -19,7 +18,8 @@ img{
 }
 
 body{
-  background-color: #d0d0d0;
+  font-family: 'Geologica', sans-serif;
+  background-color: #ccc;
   
   max-width: 100vw;
   

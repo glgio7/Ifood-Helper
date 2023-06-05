@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import { useServerInsertedHTML } from "next/navigation";
 import { ServerStyleSheet, StyleSheetManager } from "styled-components";
-import { GoogleFonts } from "next-google-fonts";
 import { GlobalCSS } from "./styles/globals";
 
 export default function StyledComponentsRegistry({
@@ -26,7 +25,6 @@ export default function StyledComponentsRegistry({
 	return (
 		<StyleSheetManager sheet={styledComponentsStyleSheet.instance}>
 			<GlobalCSS />
-			<GoogleFonts href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap" />
 			{children}
 		</StyleSheetManager>
 	);
