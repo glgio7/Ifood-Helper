@@ -2,26 +2,26 @@ Ifood Helper
 
 REQUISITOS FUNCIONAIS:
 
-1 - O usuario terá uma pontuação mediante a interação com app.
-2 - O usuario terá acesso há informações no raio de 5km da sua localização atual.
-3 - O usuario deverá compartilhar a localização.
-4 - Integração com API de Geolocalização.
-5 - O usuario realizar cadastro para uso da plataforma.
-6 - As informações inciais a serem adicionadas serão:
+- O usuario terá uma pontuação mediante a interação com app.
+- O usuario terá acesso há informações no raio de 5km da sua localização atual.
+- O usuario deverá compartilhar a localização.
+- Integração com API de Geolocalização.
+- O usuario realizar cadastro para uso da plataforma.
+- As informações inciais a serem adicionadas serão:
 
-- área de risco
-- baixa iluminação
-- buracos na pista
-- estabelecimentos com alta demanda
+-> área de risco<br/>
+-> baixa iluminação<br/>
+-> buracos na pista<br/>
+-> estabelecimentos com alta demanda<br/>
 
 REQUISITOS NÃO-FUNCIONAIS:
 
-1 - Monorepo | dividido em client e server
-2 - Next.js para SSR e otimizacao de performance
-3 - API Rest
-4 - MongoDB para cadastro de usuario e demais informações
+- Monorepo | dividido em client e server
+- Next.js para SSR e otimizacao de performance
+- API Rest
+- MongoDB para cadastro de usuario e demais informações<br/>
 
-- possibilidade de migração para PostgreSQL mediante necessidade
+-> possibilidade de migração para PostgreSQL mediante necessidade
 
 UX/UI:
 
