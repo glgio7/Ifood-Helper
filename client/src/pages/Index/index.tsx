@@ -1,13 +1,23 @@
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import * as S from "./styles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Loading from "../../components/Loading";
 
 const Home = () => {
-	const [lat, setLat] = useState<number | undefined>(-23.5489);
-	const [long, setLong] = useState<number | undefined>(-46.6388);
+	const [lat, setLat] = useState<number | undefined>();
+	const [long, setLong] = useState<number | undefined>();
+
+	useEffect(() => {
+		navigator.geolocation.getCurrentPosition(function (position) {
+			setLat(position.coords.latitude);
+			setLong(position.coords.longitude);
+		});
+	}, []);
+
 	return (
 		<S.Home>
+			{(!lat || !long) && <Loading />}
 			{lat && long !== undefined && (
 				<MapContainer
 					center={[lat, long]}
