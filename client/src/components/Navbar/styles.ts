@@ -44,14 +44,13 @@ export const Navbar = styled.nav<{ active: boolean }>`
 			align-items: center;
 		}
 
-		width: 60vw;
-		height: 100vh;
+		width: 50vw;
+		height: calc(100vh - var(--header-height));
 		background-color: #fff;
-		box-shadow: -3px 0px 10px rgba(0, 0, 0, 0.5);
+		box-shadow: -3px 10px 10px rgba(0, 0, 0, 0.5);
 
 		position: absolute;
-		top: 0;
-		bottom: 0;
+		top: var(--header-height);
 		right: 0;
 
 		z-index: 99;

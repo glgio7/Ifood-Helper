@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Header = styled.header`
 	width: 100%;
-	height: 64px;
+	height: var(--header-height);
 
 	background-color: #fff;
 
@@ -12,13 +12,10 @@ export const Header = styled.header`
 
 	padding: 0 1rem;
 
-	.logo-container {
-		display: flex;
-		align-items: baseline;
-		min-width: 40%;
-	}
-
 	h1 {
+		min-width: 40%;
+		display: inline-flex;
+
 		font-size: 2rem;
 
 		color: #dd2222;
@@ -26,7 +23,6 @@ export const Header = styled.header`
 
 	.logo-icon {
 		width: 36px;
-		height: 36px;
 		aspect-ratio: 1;
 	}
 
@@ -36,5 +32,17 @@ export const Header = styled.header`
 		cursor: pointer;
 
 		color: #333;
+	}
+
+	@media screen and (max-width: 768px) {
+		h1 {
+			justify-content: center;
+			width: 100%;
+		}
+
+		.menu-btn {
+			position: absolute;
+			right: 1rem;
+		}
 	}
 `;

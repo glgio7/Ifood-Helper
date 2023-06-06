@@ -12,6 +12,9 @@ export const GlobalCSS = createGlobalStyle`
   
   list-style: none;
 }
+:root {
+  --header-height: 64px;
+}
 
 a{
   color: inherit;

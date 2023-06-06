@@ -1,18 +1,17 @@
 import * as S from "./styles";
 import icon from "../../assets/head-icon.svg";
 import Navbar from "../Navbar";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
+	const navigate = useNavigate();
 	return (
 		<S.Header>
-			<Link to={"/"} className="logo-container">
-				<h1>
-					<span>Ifood</span>
-					<img src={icon} alt="" className="logo-icon" />
-					<span>Helper</span>
-				</h1>
-			</Link>
+			<h1 onClick={() => navigate("/")}>
+				<span>Ifood</span>
+				<img src={icon} alt="" className="logo-icon" />
+				<span>Helper</span>
+			</h1>
 			<Navbar />
 		</S.Header>
 	);
