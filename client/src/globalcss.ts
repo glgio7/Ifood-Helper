@@ -1,4 +1,4 @@
-import { createGlobalStyle, styled } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalCSS = createGlobalStyle`
 * {
@@ -13,12 +13,19 @@ export const GlobalCSS = createGlobalStyle`
   list-style: none;
 }
 
+a{
+  color: inherit;
+}
+
 img{ 
   width: 100%;
 }
 
 body{
   font-family: 'Geologica', sans-serif;
+
+  position: relative;
+  
   background-color: #ccc;
   
   max-width: 100vw;

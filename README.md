@@ -17,7 +17,6 @@ REQUISITOS FUNCIONAIS:
 REQUISITOS NÃO-FUNCIONAIS:
 
 - Monorepo | dividido em client e server
-- Next.js para SSR e otimizacao de performance
 - API Rest
 - MongoDB para cadastro de usuario e demais informações<br/>
 

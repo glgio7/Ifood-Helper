@@ -1,6 +1,4 @@
-"use client";
-
-import { styled } from "styled-components";
+import styled from "styled-components";
 
 export const Header = styled.header`
 	width: 100%;
@@ -17,6 +15,7 @@ export const Header = styled.header`
 	.logo-container {
 		display: flex;
 		align-items: baseline;
+		min-width: 40%;
 	}
 
 	h1 {
@@ -28,6 +27,7 @@ export const Header = styled.header`
 	.logo-icon {
 		width: 36px;
 		height: 36px;
+		aspect-ratio: 1;
 	}
 
 	.menu-btn {
