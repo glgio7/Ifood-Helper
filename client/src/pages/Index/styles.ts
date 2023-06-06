@@ -11,6 +11,6 @@ export const Home = styled.main`
 	.leaftlet-container {
 		height: calc(100vh - 64px);
 		width: 100%;
-		z-index: 90;
+		z-index: 9;
 	}
 `;

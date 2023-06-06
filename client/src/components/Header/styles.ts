@@ -12,6 +12,8 @@ export const Header = styled.header`
 
 	padding: 0 1rem;
 
+	z-index: 99;
+
 	h1 {
 		min-width: 40%;
 
