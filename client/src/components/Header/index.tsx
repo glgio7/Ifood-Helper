@@ -1,5 +1,5 @@
 import * as S from "./styles";
-import icon from "../../assets/head-icon.svg";
+import icon from "../../assets/head-icon-firebrick.svg";
 import Navbar from "../Navbar";
 import { useNavigate } from "react-router-dom";
 

@@ -18,7 +18,7 @@ const Loading = () => {
 					setPoints(".");
 					break;
 			}
-		}, 750);
+		}, 1000);
 	}, [points]);
 
 	return (

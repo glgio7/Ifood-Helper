@@ -35,6 +35,17 @@ export const Navbar = styled.nav<{ active: boolean }>`
 
 		padding: 1rem;
 
+		width: 50vw;
+		height: calc(100vh - var(--header-height));
+		background-color: #fff;
+		box-shadow: -3px 10px 10px rgba(0, 0, 0, 0.5);
+
+		position: fixed;
+		top: var(--header-height);
+		right: 0;
+
+		z-index: 99;
+
 		transition: all 300ms;
 
 		.nav-links {
@@ -43,17 +54,6 @@ export const Navbar = styled.nav<{ active: boolean }>`
 			justify-content: space-evenly;
 			align-items: center;
 		}
-
-		width: 50vw;
-		height: calc(100vh - var(--header-height));
-		background-color: #fff;
-		box-shadow: -3px 10px 10px rgba(0, 0, 0, 0.5);
-
-		position: absolute;
-		top: var(--header-height);
-		right: 0;
-
-		z-index: 99;
 
 		.menu-btn {
 			order: -1;

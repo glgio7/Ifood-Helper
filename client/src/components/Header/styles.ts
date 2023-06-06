@@ -14,6 +14,9 @@ export const Header = styled.header`
 
 	h1 {
 		min-width: 40%;
+
+		cursor: pointer;
+
 		display: inline-flex;
 
 		font-size: 2rem;
@@ -35,6 +38,9 @@ export const Header = styled.header`
 	}
 
 	@media screen and (max-width: 768px) {
+		position: sticky;
+		top: 0;
+
 		h1 {
 			justify-content: center;
 			width: 100%;
