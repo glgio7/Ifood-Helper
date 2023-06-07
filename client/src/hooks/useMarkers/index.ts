@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import { Coords, IMarker } from "../../pages/Index/types";
+import { useCallback, useEffect, useState } from "react";
 import { icons } from "../../utils/icons";
+import { Coords, IMarker } from "./types";
 
 export const useMarkers = () => {
 	const [markers, setMarkers] = useState<IMarker[]>([]);
 	const [currentMarker, setCurrentMarker] = useState<IMarker | null>(null);
 	const [newMarker, setNewMarker] = useState<IMarker | null>(null);
-	const [newCoords, setNewCoords] = useState<Coords>({} as Coords);
+	const [coords, setCoords] = useState<Coords>({} as Coords);
 
 	useEffect(() => {
 		const currentIcon = icons.find(
@@ -47,14 +47,39 @@ export const useMarkers = () => {
 		// setInterval(updateCurrentLocation, 10000);
 	}, []);
 
+	const addMarkerPosition = useCallback(
+		async (coords: Coords) => {
+			const { lat, lng } = coords;
+
+			if (lat && lng)
+				try {
+					const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
+					const response = await fetch(url);
+					const data = await response.json();
+					const street = data.display_name.split(",")[0];
+
+					const confirmation = window.confirm(
+						`Adicionar marcador em ${street}?`
+					);
+
+					return confirmation ? true : false;
+				} catch (error) {
+					alert("Ocorreu um erro.");
+					console.log("Ocorreu um erro:", error);
+				}
+		},
+		[coords]
+	);
+
 	return {
+		addMarkerPosition,
 		markers,
 		setMarkers,
 		currentMarker,
 		setCurrentMarker,
 		newMarker,
 		setNewMarker,
-		newCoords,
-		setNewCoords,
+		coords,
+		setCoords,
 	};
 };

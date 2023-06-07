@@ -1,8 +1,9 @@
-import { Coords, IMarker } from "../pages/Index/types";
+import { IMarker } from "../hooks/useMarkers/types";
 
 export type HandleAddMarkerProps = {
-	setCoords: React.Dispatch<React.SetStateAction<Coords>>;
 	setCurrentMarker: React.Dispatch<React.SetStateAction<IMarker | null>>;
+	setNewMarker: React.Dispatch<React.SetStateAction<IMarker | null>>;
+	setPopup: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export interface MarkerIcon {

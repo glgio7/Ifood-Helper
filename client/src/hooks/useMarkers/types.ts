@@ -8,8 +8,3 @@ export interface IMarker {
 	position: Coords;
 	comment: string;
 }
-
-export type HandleClickMapProps = {
-	markers: IMarker[];
-	setMarkers: React.Dispatch<React.SetStateAction<IMarker[]>>;
-};

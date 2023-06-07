@@ -2,9 +2,6 @@ import "leaflet/dist/leaflet.css";
 import * as S from "./styles";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import { MapContainer, TileLayer } from "react-leaflet";
-import { useEffect } from "react";
-import { IMarker } from "./types";
-import { icons } from "../../utils/icons";
 import { HandleAddMarker } from "../../utils/addMarker";
 import Loading from "../../components/Loading";
 import Marker from "../../components/Marker";
@@ -12,6 +9,7 @@ import Popup from "../../components/Popup";
 import { createCustomIcon } from "../../utils/addIcon";
 import { useInterface } from "../../hooks/useInterface";
 import { useMarkers } from "../../hooks/useMarkers";
+import { IMarker } from "../../hooks/useMarkers/types";
 
 const Home = () => {
 	const { popup, setPopup } = useInterface();
@@ -23,40 +21,7 @@ const Home = () => {
 		setMarkers,
 		newMarker,
 		setNewMarker,
-		newCoords,
-		setNewCoords,
 	} = useMarkers();
-
-	useEffect(() => {
-		const { lat, lng } = newCoords;
-		if (lat && lng) {
-			const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat.toString()}&lon=${lng.toString()}`;
-
-			fetch(url)
-				.then((response) => response.json())
-				.then((data) => {
-					const address = data.display_name.split(",");
-					const street = address[0];
-
-					const confirmation = window.confirm(
-						`Adicionar marcador em ${street}?`
-					);
-
-					if (confirmation) {
-						setNewMarker({
-							comment: "",
-							icon: icons[0],
-							position: { lat, lng },
-						});
-						setPopup(true);
-					}
-				})
-				.catch((error) => {
-					alert("Ocorreu um erro.");
-					console.log("Ocorreu um erro:", error);
-				});
-		}
-	}, [newCoords]);
 
 	return (
 		<S.Home>
@@ -73,7 +38,8 @@ const Home = () => {
 						scrollWheelZoom={true}
 					>
 						<HandleAddMarker
-							setCoords={setNewCoords}
+							setNewMarker={setNewMarker}
+							setPopup={setPopup}
 							setCurrentMarker={setCurrentMarker}
 						/>
 						<TileLayer
