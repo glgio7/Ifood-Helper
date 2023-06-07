@@ -26,6 +26,7 @@ const Loading = () => {
 			<img src={icon} alt="Loading please wait..." className="loading-icon" />
 			<span>Loading</span>
 			<span>{points}</span>
+			<p>É necessário permitir a localização do dispositivo para carregar.</p>
 		</S.Loading>
 	);
 };

@@ -1,8 +1,11 @@
-import { Icon, LatLngExpression } from "leaflet";
+import { MarkerIcon } from "../../utils/types";
+
+// export type Coords = LatLngLiteral;
+export type Coords = { lat: number; lng: number };
 
 export interface IMarker {
-	icon: Icon;
-	position: LatLngExpression;
+	icon: MarkerIcon;
+	position: Coords;
 	comment: string;
 }
 
