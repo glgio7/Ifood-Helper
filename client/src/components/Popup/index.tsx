@@ -2,7 +2,6 @@ import * as S from "./styles";
 import { RiCloseFill } from "react-icons/ri";
 import { PopupProps } from "./types";
 import { icons } from "../../utils/icons";
-import { IMarker } from "../../hooks/useMarkers/types";
 
 const Popup = ({
 	popup,
@@ -14,7 +13,7 @@ const Popup = ({
 }: PopupProps) => {
 	const handleChangeMarker = (prop: string, value: string, name?: string) => {
 		if (value) {
-			setNewMarker((prevState: IMarker) => {
+			setNewMarker((prevState) => {
 				return {
 					...prevState!,
 					[prop]: value,
@@ -23,7 +22,7 @@ const Popup = ({
 		}
 
 		if (prop === "icon") {
-			setNewMarker((prevState: IMarker) => {
+			setNewMarker((prevState) => {
 				return {
 					...prevState!,
 					icon: {

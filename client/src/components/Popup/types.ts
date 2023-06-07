@@ -1,5 +1,5 @@
 import React from "react";
-import { IMarker } from "../../pages/Index/types";
+import { IMarker } from "../../hooks/useMarkers/types";
 
 export type PopupProps = {
 	popup: boolean;
