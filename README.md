@@ -2,11 +2,13 @@ Ifood Helper
 
 REQUISITOS FUNCIONAIS:
 
+- Integração com API de Geolocalização. - Adicionado!
+- O usuario deverá compartilhar a localização. - Adicionado!
+- O usuário poderá adicionar um marcador mesmo que já não esteja mais na localização do alera. - Adicionado!
 - O usuario terá uma pontuação mediante a interação com app.
-- O usuario terá acesso há informações no raio de 5km da sua localização atual.
-- O usuario deverá compartilhar a localização.
-- Integração com API de Geolocalização.
-- O usuario realizar cadastro para uso da plataforma.
+- O usuario deverá realizar cadastro para uso da plataforma.
+- Os marcadores serão agrupados quando o zoom do mapa for diminuídos, marcando a quantidade de alertas na área agrupada. - Adicionado!
+- Cada marcador será obrigatóriamente associado a um usuário, mas um usuário poderá adicionar vários alertas.
 - As informações inciais a serem adicionadas serão:
 
 -> área de risco<br/>
