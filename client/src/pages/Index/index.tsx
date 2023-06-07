@@ -13,9 +13,7 @@ import { createCustomIcon } from "../../utils/addIcon";
 
 const Home = () => {
 	const [markers, setMarkers] = useState<IMarker[]>([]);
-	const [currentMarker, setCurrentMarker] = useState<IMarker | null>(
-		{} as IMarker
-	);
+	const [currentMarker, setCurrentMarker] = useState<IMarker | null>(null);
 	const [newMarker, setNewMarker] = useState<IMarker | null>(null);
 
 	const [newCoords, setNewCoords] = useState<Coords>({} as Coords);
@@ -57,7 +55,7 @@ const Home = () => {
 		};
 
 		updateCurrentLocation();
-		setInterval(updateCurrentLocation, 10000);
+		// setInterval(updateCurrentLocation, 10000);
 	}, []);
 
 	useEffect(() => {
@@ -105,7 +103,10 @@ const Home = () => {
 						className="leaftlet-container"
 						scrollWheelZoom={true}
 					>
-						<HandleAddMarker setCoords={setNewCoords} />
+						<HandleAddMarker
+							setCoords={setNewCoords}
+							setCurrentMarker={setCurrentMarker}
+						/>
 						<TileLayer
 							attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 							url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
