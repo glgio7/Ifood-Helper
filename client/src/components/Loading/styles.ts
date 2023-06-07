@@ -9,16 +9,30 @@ export const Loading = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	color: #fff;
 
 	span {
-		color: #fff;
-
 		font-size: 3rem;
 		font-weight: bold;
 	}
 
+	p {
+		text-align: center;
+		max-width: 90%;
+	}
+
 	.loading-icon {
-		max-width: 320px;
+		width: 320px;
 		aspect-ratio: 1;
+	}
+
+	@media screen and (max-width: 768px) {
+		.loading-icon {
+			max-width: 60%;
+		}
+
+		span {
+			font-size: 2rem;
+		}
 	}
 `;

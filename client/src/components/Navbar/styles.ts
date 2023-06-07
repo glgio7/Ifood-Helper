@@ -3,18 +3,17 @@ import styled from "styled-components";
 export const Navbar = styled.nav<{ active: boolean }>`
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
 
-	width: 75%;
+	width: 50%;
 
 	color: #dd2222;
 
 	.nav-links {
-		display: flex;
+		display: inline-flex;
 	}
 
 	a {
-		margin-inline: 2rem;
+		margin-inline: 1.5rem;
 
 		transition: all 250ms;
 

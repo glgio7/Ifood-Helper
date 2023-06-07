@@ -11,6 +11,8 @@ export const GlobalCSS = createGlobalStyle`
   text-decoration: none;
   
   list-style: none;
+  
+  border: none
 }
 :root {
   --header-height: 64px;
@@ -22,6 +24,10 @@ a{
 
 img{ 
   width: 100%;
+}
+
+button{
+  cursor: pointer;;
 }
 
 body{

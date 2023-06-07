@@ -6,6 +6,7 @@ export const Home = styled.main`
 
 	position: relative;
 `;
+
 export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -19,37 +20,4 @@ export const Container = styled.div`
 		width: 100%;
 		z-index: 9;
 	}
-
-	.custom-popup .leaflet-popup-content-wrapper {
-		background: #bb2222;
-
-		color: #fff;
-	}
-	.custom-popup .leaflet-popup-content-wrapper a {
-		color: rgba(255, 255, 255, 0.1);
-	}
-
-	.custom-popup .leaflet-popup-close-button {
-		color: #fff;
-	}
-
-	.custom-popup .leaflet-popup-tip-container {
-		background: transparent;
-	}
-	.custom-popup .leaflet-popup-tip {
-		background: #bb2222;
-	}
-`;
-
-export const CustomPopup = styled.div`
-	position: absolute;
-	display: none;
-	z-index: 10;
-
-	width: 80%;
-	height: 80%;
-
-	border-radius: 10px;
-
-	background-color: #bb2222;
 `;

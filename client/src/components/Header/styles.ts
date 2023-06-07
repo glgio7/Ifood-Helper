@@ -15,7 +15,7 @@ export const Header = styled.header`
 	z-index: 99;
 
 	h1 {
-		min-width: 40%;
+		min-width: 35%;
 
 		cursor: pointer;
 
@@ -46,6 +46,7 @@ export const Header = styled.header`
 		h1 {
 			justify-content: center;
 			width: 100%;
+			font-size: 1.75rem;
 		}
 
 		.menu-btn {
