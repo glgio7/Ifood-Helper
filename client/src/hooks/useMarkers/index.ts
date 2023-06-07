@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { IMarker } from "../../pages/Index/types";
+import { Coords, IMarker } from "../../pages/Index/types";
 import { icons } from "../../utils/icons";
 
 export const useMarkers = () => {
 	const [markers, setMarkers] = useState<IMarker[]>([]);
 	const [currentMarker, setCurrentMarker] = useState<IMarker | null>(null);
 	const [newMarker, setNewMarker] = useState<IMarker | null>(null);
+	const [newCoords, setNewCoords] = useState<Coords>({} as Coords);
 
 	useEffect(() => {
 		const currentIcon = icons.find(
@@ -53,5 +54,7 @@ export const useMarkers = () => {
 		setCurrentMarker,
 		newMarker,
 		setNewMarker,
+		newCoords,
+		setNewCoords,
 	};
 };

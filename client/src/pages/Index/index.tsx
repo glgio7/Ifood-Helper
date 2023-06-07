@@ -2,8 +2,8 @@ import "leaflet/dist/leaflet.css";
 import * as S from "./styles";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import { MapContainer, TileLayer } from "react-leaflet";
-import { useEffect, useState } from "react";
-import { IMarker, Coords } from "./types";
+import { useEffect } from "react";
+import { IMarker } from "./types";
 import { icons } from "../../utils/icons";
 import { HandleAddMarker } from "../../utils/addMarker";
 import Loading from "../../components/Loading";
@@ -14,17 +14,17 @@ import { useInterface } from "../../hooks/useInterface";
 import { useMarkers } from "../../hooks/useMarkers";
 
 const Home = () => {
-	const [newCoords, setNewCoords] = useState<Coords>({} as Coords);
-
 	const { popup, setPopup } = useInterface();
 
 	const {
-		markers,
-		setMarkers,
 		currentMarker,
 		setCurrentMarker,
+		markers,
+		setMarkers,
 		newMarker,
 		setNewMarker,
+		newCoords,
+		setNewCoords,
 	} = useMarkers();
 
 	useEffect(() => {
@@ -89,6 +89,7 @@ const Home = () => {
 										position={marker.position}
 										icon={customIcon}
 										key={Math.random() * 999999999999}
+										marker={marker}
 										onClick={() => {
 											setCurrentMarker(marker);
 											setPopup(!popup);
@@ -99,6 +100,8 @@ const Home = () => {
 						</MarkerClusterGroup>
 					</MapContainer>
 					<Popup
+						popup={popup}
+						setPopup={setPopup}
 						currentMarker={currentMarker}
 						newMarker={newMarker}
 						setNewMarker={setNewMarker}
