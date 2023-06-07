@@ -1,10 +1,10 @@
 import * as S from "./styles";
 import { RiHome3Fill } from "react-icons/ri";
-import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useInterface } from "../../hooks/useInterface";
 
 const Navbar = () => {
-	const [menuOpen, setMenuOpen] = useState<boolean>(false);
+	const { openMenu, setOpenMenu } = useInterface();
 
 	const navLinks = [
 		{
@@ -27,13 +27,13 @@ const Navbar = () => {
 
 	return (
 		<>
-			<S.Navbar active={menuOpen}>
+			<S.Navbar active={openMenu}>
 				<div className="nav-links">
 					{navLinks.map((navlink) => (
 						<Link
 							key={navlink.span}
 							to={navlink.href}
-							onClick={() => setMenuOpen(false)}
+							onClick={() => setOpenMenu(false)}
 						>
 							{navlink.span}
 						</Link>
@@ -42,7 +42,7 @@ const Navbar = () => {
 			</S.Navbar>
 			<RiHome3Fill
 				className="menu-btn"
-				onClick={() => setMenuOpen(!menuOpen)}
+				onClick={() => setOpenMenu(!openMenu)}
 			/>
 		</>
 	);

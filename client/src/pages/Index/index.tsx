@@ -10,6 +10,7 @@ import Loading from "../../components/Loading";
 import Marker from "../../components/Marker";
 import Popup from "../../components/Popup";
 import { createCustomIcon } from "../../utils/addIcon";
+import { useInterface } from "../../hooks/useInterface";
 
 const Home = () => {
 	const [markers, setMarkers] = useState<IMarker[]>([]);
@@ -17,7 +18,8 @@ const Home = () => {
 	const [newMarker, setNewMarker] = useState<IMarker | null>(null);
 
 	const [newCoords, setNewCoords] = useState<Coords>({} as Coords);
-	const [popup, setPopup] = useState<boolean>(false);
+
+	const { popup, setPopup } = useInterface();
 
 	useEffect(() => {
 		const currentIcon = icons.find(
@@ -130,8 +132,6 @@ const Home = () => {
 						</MarkerClusterGroup>
 					</MapContainer>
 					<Popup
-						popup={popup}
-						setPopup={setPopup}
 						currentMarker={currentMarker}
 						newMarker={newMarker}
 						setNewMarker={setNewMarker}
