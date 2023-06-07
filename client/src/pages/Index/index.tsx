@@ -11,54 +11,21 @@ import Marker from "../../components/Marker";
 import Popup from "../../components/Popup";
 import { createCustomIcon } from "../../utils/addIcon";
 import { useInterface } from "../../hooks/useInterface";
+import { useMarkers } from "../../hooks/useMarkers";
 
 const Home = () => {
-	const [markers, setMarkers] = useState<IMarker[]>([]);
-	const [currentMarker, setCurrentMarker] = useState<IMarker | null>(null);
-	const [newMarker, setNewMarker] = useState<IMarker | null>(null);
-
 	const [newCoords, setNewCoords] = useState<Coords>({} as Coords);
 
 	const { popup, setPopup } = useInterface();
 
-	useEffect(() => {
-		const currentIcon = icons.find(
-			(item) => item.iconUrl === "/icons/current-icon.svg"
-		);
-
-		const updateCurrentLocation = () => {
-			navigator.geolocation.getCurrentPosition((position) => {
-				const lat = position.coords.latitude;
-				const lng = position.coords.longitude;
-
-				const newMarker = {
-					icon: currentIcon!,
-					comment: "Você está aqui.",
-					position: { lat, lng },
-				};
-
-				setMarkers((prevMarkers) => {
-					const currentLocationIndex = prevMarkers.findIndex(
-						(marker) => marker.comment === "Você está aqui."
-					);
-					if (currentLocationIndex !== -1) {
-						const updatedMarkers = [...prevMarkers];
-
-						updatedMarkers[currentLocationIndex] = {
-							...prevMarkers[currentLocationIndex],
-							position: { lat, lng },
-						};
-						return updatedMarkers;
-					} else {
-						return [newMarker];
-					}
-				});
-			});
-		};
-
-		updateCurrentLocation();
-		// setInterval(updateCurrentLocation, 10000);
-	}, []);
+	const {
+		markers,
+		setMarkers,
+		currentMarker,
+		setCurrentMarker,
+		newMarker,
+		setNewMarker,
+	} = useMarkers();
 
 	useEffect(() => {
 		const { lat, lng } = newCoords;
