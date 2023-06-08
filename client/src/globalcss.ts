@@ -31,7 +31,7 @@ button{
 }
 
 body{
-  font-family: 'Geologica', sans-serif;
+  font-family: 'Montserrat Alternates', sans-serif;
 
   position: relative;
   

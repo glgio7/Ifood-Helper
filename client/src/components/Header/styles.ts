@@ -20,23 +20,21 @@ export const Header = styled.header`
 		cursor: pointer;
 
 		display: inline-flex;
+		align-items: center;
 
 		font-size: 2rem;
+		font-weight: bold;
 
 		color: #dd2222;
 	}
 
 	.logo-icon {
 		width: 36px;
+		padding: 3px;
 		aspect-ratio: 1;
 	}
-
 	.menu-btn {
-		font-size: 2rem;
-
-		cursor: pointer;
-
-		color: #333;
+		display: none;
 	}
 
 	@media screen and (max-width: 768px) {
@@ -52,6 +50,14 @@ export const Header = styled.header`
 		.menu-btn {
 			position: absolute;
 			right: 1rem;
+
+			display: block;
+
+			cursor: pointer;
+
+			color: #333;
+
+			font-size: 1.75rem;
 		}
 	}
 `;

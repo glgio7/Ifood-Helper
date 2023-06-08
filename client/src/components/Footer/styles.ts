@@ -18,6 +18,7 @@ export const Footer = styled.footer`
 
 	p {
 		color: #dd2222;
+		font-weight: bold;
 	}
 
 	@media screen and (max-width: 768px) {
