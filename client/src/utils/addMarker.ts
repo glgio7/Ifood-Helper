@@ -1,16 +1,14 @@
 import { useMapEvents } from "react-leaflet";
-import { HandleAddMarkerProps } from "./types";
 import { useMarkers } from "../hooks/useMarkers";
 import { icons } from "./icons";
-import { Coords } from "../hooks/useMarkers/types";
+import { Coords } from "../contexts/MarkersContext/types";
+import { useInterface } from "../hooks/useInterface";
 
-export const HandleAddMarker = ({
-	// setCoords,
-	setCurrentMarker,
-	setNewMarker,
-	setPopup,
-}: HandleAddMarkerProps) => {
-	const { addMarkerPosition, setCoords } = useMarkers();
+export const AddMarkerListener = () => {
+	const { addMarkerPosition, setCoords, setCurrentMarker, setNewMarker } =
+		useMarkers();
+
+	const { setPopup, setLoadingMarker } = useInterface();
 
 	useMapEvents({
 		click(event) {
@@ -19,6 +17,7 @@ export const HandleAddMarker = ({
 			setCoords({ lat, lng });
 
 			addMarkerPosition({ lat, lng }).then((confirmed) => {
+				setLoadingMarker(false);
 				if (confirmed) {
 					setCurrentMarker(null);
 					setNewMarker({

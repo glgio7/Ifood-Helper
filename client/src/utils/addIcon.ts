@@ -1,7 +1,7 @@
 import { Icon } from "leaflet";
-import { MarkerIcon } from "./types";
+import { IMarkerIcon } from "./types";
 
-export const createCustomIcon = (icon: MarkerIcon) => {
+export const createCustomIcon = (icon: IMarkerIcon) => {
 	return new Icon({
 		iconUrl: icon.iconUrl,
 		name: icon.name,

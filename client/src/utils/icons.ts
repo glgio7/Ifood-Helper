@@ -1,8 +1,8 @@
 //Icons
 
-import { MarkerIcon } from "./types";
+import { IMarkerIcon } from "./types";
 
-export const icons: MarkerIcon[] = [
+export const icons: IMarkerIcon[] = [
 	{
 		iconUrl: "/icons/new-icon.svg",
 		name: "Selecionar",
