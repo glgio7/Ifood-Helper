@@ -1,16 +1,14 @@
 import * as S from "./styles";
 import { RiCloseFill } from "react-icons/ri";
-import { PopupProps } from "./types";
 import { icons } from "../../utils/icons";
+import { useMarkers } from "../../hooks/useMarkers";
+import { useInterface } from "../../hooks/useInterface";
 
-const Popup = ({
-	popup,
-	setPopup,
-	newMarker,
-	currentMarker,
-	setNewMarker,
-	setMarkers,
-}: PopupProps) => {
+const Popup = () => {
+	const { setNewMarker, currentMarker, setMarkers, newMarker } = useMarkers();
+
+	const { popup, setPopup } = useInterface();
+
 	const handleChangeMarker = (prop: string, value: string, name?: string) => {
 		if (value) {
 			setNewMarker((prevState) => {

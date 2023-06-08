@@ -1,7 +1,6 @@
-import * as S from "./styles";
-import { RiHome3Fill } from "react-icons/ri";
-import { Link } from "react-router-dom";
 import { useInterface } from "../../hooks/useInterface";
+import * as S from "./styles";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
 	const { openMenu, setOpenMenu } = useInterface();
@@ -39,11 +38,9 @@ const Navbar = () => {
 						</Link>
 					))}
 				</div>
+
+				<button className="auth-btn">Entrar</button>
 			</S.Navbar>
-			<RiHome3Fill
-				className="menu-btn"
-				onClick={() => setOpenMenu(!openMenu)}
-			/>
 		</>
 	);
 };

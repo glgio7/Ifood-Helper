@@ -1,11 +1,15 @@
 import { Marker as DefaultMarker } from "react-leaflet";
 import { MyMarkerProps } from "./types";
+import { useMarkers } from "../../hooks/useMarkers";
+import { useInterface } from "../../hooks/useInterface";
 
-const Marker = ({ onClick, ...otherProps }: MyMarkerProps) => {
+const Marker = ({ marker, ...otherProps }: MyMarkerProps) => {
+	const { setCurrentMarker } = useMarkers();
+	const { setPopup } = useInterface();
+
 	const handleMarkerClick = () => {
-		if (onClick) {
-			onClick();
-		}
+		setPopup(true);
+		setCurrentMarker(marker);
 	};
 
 	return (
