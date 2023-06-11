@@ -11,8 +11,12 @@ export class Marker implements IMarker {
 				!props[field as keyof IMarker] ||
 				props[field as keyof IMarker] === ""
 			) {
-				throw new Error("Author cannot be empty!");
+				throw new Error(`${field} cannot be empty!`);
 			}
+		}
+
+		if (!props.position.lat || !props.position.lng) {
+			throw new Error(`Position is invalid!`);
 		}
 
 		this.props = props;
