@@ -1,5 +1,5 @@
 import { MongoClientMarkers } from "../../database/mongo";
-import { IMarker } from "../../entities/markers/protocols";
+import { IMarker } from "../../entities/marker/protocols";
 import { ICreateMarkerRepository } from "../../use-cases/create-marker/protocols";
 
 export class CreateMarkerRepositoy implements ICreateMarkerRepository {

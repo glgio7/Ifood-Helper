@@ -1,5 +1,5 @@
-import { Marker } from "../../entities/markers/marker";
-import { IMarker } from "../../entities/markers/protocols";
+import { Marker } from "../../entities/marker/marker";
+import { IMarker } from "../../entities/marker/protocols";
 import { HttpRequest, HttpResponse } from "../protocols";
 import { ICreateMarkerController, ICreateMarkerRepository } from "./protocols";
 

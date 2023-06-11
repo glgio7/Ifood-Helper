@@ -1,4 +1,4 @@
-import { IMarker } from "../../entities/markers/protocols";
+import { IMarker } from "../../entities/marker/protocols";
 import { HttpRequest, HttpResponse } from "../protocols";
 
 export interface ICreateMarkerController {
