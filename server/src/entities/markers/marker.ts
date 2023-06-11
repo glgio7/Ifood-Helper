@@ -19,6 +19,10 @@ export class Marker implements IMarker {
 			throw new Error(`Position is invalid!`);
 		}
 
+		if (!props.icon.iconUrl || !props.icon.label) {
+			throw new Error(`Icon is invalid!`);
+		}
+
 		this.props = props;
 	}
 

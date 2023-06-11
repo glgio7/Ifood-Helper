@@ -1,3 +1,4 @@
+import { Marker } from "../../entities/markers/marker";
 import { IMarker } from "../../entities/markers/protocols";
 import { HttpRequest, HttpResponse } from "../protocols";
 import { ICreateMarkerController, ICreateMarkerRepository } from "./protocols";
@@ -11,9 +12,11 @@ export class CreateMarkerController implements ICreateMarkerController {
 		httpRequest: HttpRequest<IMarker>
 	): Promise<HttpResponse<IMarker>> {
 		try {
-			const marker = await this.createMarkerRepositoy.createMarker(
-				httpRequest.body
-			);
+			const { author, comment, icon, position } = httpRequest.body;
+
+			const newMarker = new Marker({ author, comment, icon, position });
+
+			const marker = await this.createMarkerRepositoy.createMarker(newMarker);
 
 			return {
 				statusCode: 200,
