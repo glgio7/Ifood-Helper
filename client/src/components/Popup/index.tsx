@@ -5,11 +5,14 @@ import { useMarkers } from "../../hooks/useMarkers";
 import { useInterface } from "../../hooks/useInterface";
 import { IMarker } from "../Marker/types";
 import axios from "axios";
+import { useState } from "react";
 
 const Popup = () => {
 	const { setNewMarker, currentMarker, setMarkers, newMarker } = useMarkers();
 
 	const { popup, setPopup } = useInterface();
+
+	const [comment, setComment] = useState<string>("");
 
 	const handleChangeMarker = (prop: string, value: string, label?: string) => {
 		if (value) {
@@ -46,7 +49,7 @@ const Popup = () => {
 			.post(url, {
 				icon: { iconUrl: newMarker.icon.iconUrl, label: newMarker.icon.label },
 				author: "user",
-				comment: newMarker.comment,
+				comment: comment,
 				position: { lat: newMarker.position.lat, lng: newMarker.position.lng },
 			})
 			.then((response) => {
@@ -122,9 +125,12 @@ const Popup = () => {
 						<input
 							type="text"
 							id="comment"
-							value={newMarker.comment}
+							value={comment}
 							required
-							onChange={(e) => handleChangeMarker("comment", e.target.value)}
+							onChange={(e) => {
+								setComment(e.target.value);
+								handleChangeMarker("comment", comment);
+							}}
 						/>
 						<button type="submit" className="submit-btn">
 							Confirmar
