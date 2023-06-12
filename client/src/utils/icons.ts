@@ -5,24 +5,24 @@ import { IMarkerIcon } from "./types";
 export const icons: IMarkerIcon[] = [
 	{
 		iconUrl: "/icons/new-icon.svg",
-		name: "Selecionar",
+		label: "Selecionar",
 	},
 	{
 		iconUrl: "/icons/current-icon.svg",
-		name: "Localização atual.",
+		label: "Localização atual.",
 	},
 	{
 		iconUrl: "/icons/cash-icon.svg",
-		name: "Boa oportunidade.",
+		label: "Boa oportunidade.",
 	},
 	{
 		iconUrl: "/icons/hole-icon.svg",
-		name: "Buraco na pista.",
+		label: "Buraco na pista.",
 	},
 	{
 		iconUrl: "/icons/low-light-icon.svg",
 
-		name: "Baixa iluminação.",
+		label: "Baixa iluminação.",
 	},
-	{ iconUrl: "/icons/others-icon.svg", name: "Diversos." },
+	{ iconUrl: "/icons/others-icon.svg", label: "Diversos." },
 ];
