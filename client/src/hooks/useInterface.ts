@@ -1,27 +1,23 @@
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useContext } from "react";
 import { UIContext } from "../contexts/UIContext";
-import { IMarkerPosition } from "../components/LoadingMarker/types";
 
 export const useInterface = () => {
-	const [markerPosition, setMarkerPosition] = useState<IMarkerPosition | null>(
-		null
-	);
 	const {
 		popup,
 		setPopup,
 		openMenu,
 		setOpenMenu,
-		loadingMarker,
-		setLoadingMarker,
+		loadingNewMarker,
+		setLoadingNewMarker,
+		markerPosition,
+		setMarkerPosition,
 	} = useContext(UIContext);
 
-	const handleClick = useCallback(
-		(event: React.MouseEvent<HTMLDivElement>) => {
+	const handleLoadingMarker = useCallback(
+		(mouseX: number, mouseY: number) => {
 			if (!popup) {
-				const mouseX = event.clientX;
-				const mouseY = event.clientY;
 				setMarkerPosition({ x: mouseX, y: mouseY });
-				setLoadingMarker(true);
+				setLoadingNewMarker(true);
 			}
 		},
 		[popup]
@@ -32,9 +28,9 @@ export const useInterface = () => {
 		setPopup,
 		openMenu,
 		setOpenMenu,
-		loadingMarker,
-		setLoadingMarker,
+		loadingNewMarker,
+		setLoadingNewMarker,
 		markerPosition,
-		handleClick,
+		handleLoadingMarker,
 	};
 };

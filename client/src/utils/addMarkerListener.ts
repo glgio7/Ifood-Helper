@@ -6,15 +6,19 @@ import { useInterface } from "../hooks/useInterface";
 export const AddMarkerListener = () => {
 	const { addNewMarkerPosition, setMarkerDetails, setNewMarker } = useMarkers();
 
-	const { setPopup, setLoadingMarker } = useInterface();
+	const { setPopup, setLoadingNewMarker, handleLoadingMarker } = useInterface();
 
 	useMapEvents({
 		click(event) {
 			const lat = event.latlng.lat;
 			const lng = event.latlng.lng;
 
+			handleLoadingMarker(
+				event.originalEvent.clientX,
+				event.originalEvent.clientY
+			);
+
 			addNewMarkerPosition({ lat, lng }).then((confirmed) => {
-				setLoadingMarker(false);
 				if (confirmed) {
 					setNewMarker({
 						comment: "",
@@ -25,6 +29,7 @@ export const AddMarkerListener = () => {
 					setMarkerDetails(null);
 					setPopup(true);
 				}
+				setLoadingNewMarker(false);
 			});
 		},
 	});

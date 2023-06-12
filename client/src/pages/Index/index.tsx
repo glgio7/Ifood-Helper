@@ -10,19 +10,17 @@ import { createCustomIcon } from "../../utils/addCustomIcon";
 import { useMarkers } from "../../hooks/useMarkers";
 import { IMarker } from "../../components/Marker/types";
 import { useInterface } from "../../hooks/useInterface";
-import { useRef } from "react";
-import LoadingMarker from "../../components/LoadingMarker";
+import LoadingNewMarker from "../../components/LoadingNewMarker";
 
 const Home = () => {
 	const { markers, currentLocation } = useMarkers();
-	const { loadingMarker, markerPosition, handleClick } = useInterface();
-	const containerRef = useRef<HTMLDivElement>(null);
+	const { loadingNewMarker, markerPosition } = useInterface();
 
 	return (
 		<S.Home>
 			{!currentLocation && <Loading />}
 			{currentLocation && (
-				<S.Container ref={containerRef} onClick={handleClick}>
+				<S.Container>
 					<MapContainer
 						center={currentLocation.position}
 						zoom={50}
@@ -60,7 +58,7 @@ const Home = () => {
 						<AddMarkerListener />
 					</MapContainer>
 					<Popup />
-					{loadingMarker && <LoadingMarker position={markerPosition} />}
+					{loadingNewMarker && <LoadingNewMarker position={markerPosition} />}
 				</S.Container>
 			)}
 		</S.Home>
