@@ -5,6 +5,7 @@ export type Coords = { lat: number; lng: number };
 
 export interface IMarkersContext {
 	markers: IMarker[];
+	currentLocation: IMarker | null;
 	setMarkers: React.Dispatch<React.SetStateAction<IMarker[]>>;
 	currentMarker: IMarker | null;
 	setCurrentMarker: React.Dispatch<React.SetStateAction<IMarker | null>>;

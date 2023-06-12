@@ -5,6 +5,7 @@ export const useMarkers = () => {
 	const {
 		addMarkerPosition,
 		markers,
+		currentLocation,
 		setMarkers,
 		currentMarker,
 		setCurrentMarker,
@@ -17,6 +18,7 @@ export const useMarkers = () => {
 	return {
 		addMarkerPosition,
 		markers,
+		currentLocation,
 		setMarkers,
 		currentMarker,
 		setCurrentMarker,

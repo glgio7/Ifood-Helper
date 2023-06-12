@@ -3,13 +3,15 @@ import { RiCloseFill } from "react-icons/ri";
 import { icons } from "../../utils/icons";
 import { useMarkers } from "../../hooks/useMarkers";
 import { useInterface } from "../../hooks/useInterface";
+import { IMarker } from "../Marker/types";
+import axios from "axios";
 
 const Popup = () => {
 	const { setNewMarker, currentMarker, setMarkers, newMarker } = useMarkers();
 
 	const { popup, setPopup } = useInterface();
 
-	const handleChangeMarker = (prop: string, value: string, name?: string) => {
+	const handleChangeMarker = (prop: string, value: string, label?: string) => {
 		if (value) {
 			setNewMarker((prevState) => {
 				return {
@@ -25,11 +27,40 @@ const Popup = () => {
 					...prevState!,
 					icon: {
 						iconUrl: value,
-						name: name!,
+						label: label!,
 					},
 				};
 			});
 		}
+	};
+
+	const handleAddMarker = (newMarker: IMarker) => {
+		const url = `${import.meta.env.VITE_APP_API_URL}/markers`;
+
+		if (newMarker.icon.label === "Selecionar") {
+			alert("Você precisa selecionar o tipo de alerta!");
+			return;
+		}
+
+		axios
+			.post(url, {
+				icon: { iconUrl: newMarker.icon.iconUrl, label: newMarker.icon.label },
+				author: "user",
+				comment: newMarker.comment,
+				position: { lat: newMarker.position.lat, lng: newMarker.position.lng },
+			})
+			.then((response) => {
+				const { comment, icon, position } = response.data;
+				setPopup(!popup);
+				setMarkers((markers) => {
+					return [...markers, { comment, icon, position }];
+				});
+				setNewMarker(null);
+			})
+			.catch((error) => {
+				console.log(error);
+				alert("Um erro aconteceu!");
+			});
 	};
 
 	return (
@@ -44,7 +75,7 @@ const Popup = () => {
 			{currentMarker && (
 				<>
 					<img className="event-icon" src={currentMarker.icon.iconUrl} />
-					<h6 className="new-alert">{currentMarker.icon.name}</h6>
+					<h6 className="new-alert">{currentMarker.icon.label}</h6>
 					{currentMarker.icon.iconUrl !== "/icons/current-icon.svg" && (
 						<>
 							<span>Comentário:</span>
@@ -59,7 +90,12 @@ const Popup = () => {
 			{newMarker && (
 				<>
 					<img className="event-icon" src={newMarker.icon.iconUrl} />
-					<form onSubmit={(e) => e.preventDefault()}>
+					<form
+						onSubmit={(e) => {
+							e.preventDefault();
+							handleAddMarker(newMarker);
+						}}
+					>
 						<h6 className="new-alert">Adicionar novo alerta</h6>
 						<label htmlFor="alert">Tipo</label>
 						<select
@@ -75,10 +111,10 @@ const Popup = () => {
 							}}
 						>
 							{icons
-								.filter((icon) => icon.name !== "Localização atual.")
+								.filter((icon) => icon.label !== "Localização atual.")
 								.map((icon) => (
 									<option value={icon.iconUrl} key={icon.iconUrl}>
-										{icon.name}
+										{icon.label}
 									</option>
 								))}
 						</select>
@@ -87,23 +123,10 @@ const Popup = () => {
 							type="text"
 							id="comment"
 							value={newMarker.comment}
+							required
 							onChange={(e) => handleChangeMarker("comment", e.target.value)}
 						/>
-						<button
-							type="submit"
-							className="submit-btn"
-							onClick={() => {
-								if (newMarker.icon.name === "Selecionar") {
-									alert("Você precisa selecionar o tipo de alerta!");
-									return;
-								}
-								setPopup(!popup);
-								setMarkers((markers) => {
-									return [...markers, newMarker];
-								});
-								setNewMarker(null);
-							}}
-						>
+						<button type="submit" className="submit-btn">
 							Confirmar
 						</button>
 					</form>

@@ -1,7 +1,7 @@
 import { createContext, useCallback, useEffect, useState } from "react";
-import { icons } from "../../utils/icons";
 import { IMarker } from "../../components/Marker/types";
 import { Coords, IMarkersContext, MarkersProvidersProps } from "./types";
+import axios from "axios";
 
 export const MarkersContext = createContext<IMarkersContext>(
 	{} as IMarkersContext
@@ -9,47 +9,42 @@ export const MarkersContext = createContext<IMarkersContext>(
 
 const MarkersProvider = ({ children }: MarkersProvidersProps) => {
 	const [markers, setMarkers] = useState<IMarker[]>([]);
+	const [currentLocation, setCurrentLocation] = useState<IMarker | null>(null);
+
+	// Gonna be renamed as markerDetails, setMarkerDetails
 	const [currentMarker, setCurrentMarker] = useState<IMarker | null>(null);
+
 	const [newMarker, setNewMarker] = useState<IMarker | null>(null);
 	const [coords, setCoords] = useState<Coords>({} as Coords);
 
 	useEffect(() => {
-		const currentIcon = icons.find(
-			(item) => item.iconUrl === "/icons/current-icon.svg"
-		);
+		const url = `${import.meta.env.VITE_APP_API_URL}/markers`;
+		axios.get(url).then((response) => {
+			const { data } = response;
+			setMarkers(data);
+		});
+	}, []);
 
+	useEffect(() => {
 		const updateCurrentLocation = () => {
 			navigator.geolocation.getCurrentPosition((position) => {
 				const lat = position.coords.latitude;
 				const lng = position.coords.longitude;
 
-				const newMarker = {
-					icon: currentIcon!,
+				const current: IMarker = {
+					icon: {
+						iconUrl: "/icons/current-icon.svg",
+						label: "Localização atual.",
+					},
 					comment: "Você está aqui.",
 					position: { lat, lng },
 				};
 
-				setMarkers((prevMarkers) => {
-					const currentLocationIndex = prevMarkers.findIndex(
-						(marker) => marker.comment === "Você está aqui."
-					);
-					if (currentLocationIndex !== -1) {
-						const updatedMarkers = [...prevMarkers];
-
-						updatedMarkers[currentLocationIndex] = {
-							...prevMarkers[currentLocationIndex],
-							position: { lat, lng },
-						};
-						return updatedMarkers;
-					} else {
-						return [newMarker];
-					}
-				});
+				setCurrentLocation(current);
 			});
 		};
 
 		updateCurrentLocation();
-		// setInterval(updateCurrentLocation, 10000);
 	}, []);
 
 	const addMarkerPosition = useCallback(
@@ -79,6 +74,7 @@ const MarkersProvider = ({ children }: MarkersProvidersProps) => {
 	const contextValue = {
 		markers,
 		setMarkers,
+		currentLocation,
 		currentMarker,
 		setCurrentMarker,
 		newMarker,

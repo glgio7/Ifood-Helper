@@ -14,20 +14,17 @@ import { useRef } from "react";
 import LoadingMarker from "../../components/LoadingMarker";
 
 const Home = () => {
-	const { markers } = useMarkers();
+	const { markers, currentLocation } = useMarkers();
 	const { loadingMarker, markerPosition, handleClick } = useInterface();
 	const containerRef = useRef<HTMLDivElement>(null);
 
 	return (
 		<S.Home>
-			{markers.length < 1 && <Loading />}
-			{markers && markers.length >= 1 && (
+			{!currentLocation && <Loading />}
+			{currentLocation && (
 				<S.Container ref={containerRef} onClick={handleClick}>
 					<MapContainer
-						center={
-							markers.find((marker) => marker.comment === "Você está aqui.")!
-								.position
-						}
+						center={currentLocation.position}
 						zoom={50}
 						className="leaftlet-container"
 					>
@@ -36,6 +33,17 @@ const Home = () => {
 							url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 						/>
 						<MarkerClusterGroup chunkedLoading>
+							{/* // Current Location Markers */}
+
+							<Marker
+								position={currentLocation.position}
+								icon={createCustomIcon(currentLocation.icon)}
+								key={Math.random() * 999999999999}
+								marker={currentLocation}
+							></Marker>
+
+							{/* // Mapping markers from DB */}
+
 							{markers.map((marker: IMarker) => {
 								const customIcon = createCustomIcon(marker.icon);
 
