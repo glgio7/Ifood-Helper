@@ -16,6 +16,7 @@ export const Header = styled.header`
 
 	h1 {
 		min-width: 35%;
+		font-family: "Montserrat Alternates", sans-serif;
 
 		cursor: pointer;
 

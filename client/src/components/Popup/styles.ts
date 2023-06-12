@@ -96,11 +96,11 @@ export const CustomPopup = styled.div<{ active: boolean }>`
 		outline: none;
 		border: none;
 
+		box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 6px;
+
 		&:focus {
 			outline: #ff0000 1px solid;
 			caret-color: #ff0000;
-
-			box-shadow: rgba(255, 255, 255, 0.5) 0px 0px 6px;
 		}
 	}
 
