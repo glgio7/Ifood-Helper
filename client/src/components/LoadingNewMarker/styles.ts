@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const LoadingMarker = styled.div<{
+export const LoadingNewMarker = styled.div<{
 	position: { x: number; y: number } | null;
 }>`
 	position: absolute;
