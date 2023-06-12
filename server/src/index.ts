@@ -13,7 +13,7 @@ const main = async () => {
 	app.use(express.json());
 	app.use(
 		cors({
-			origin: ["http://localhost:5173", "https://ifood-helper.vercel.app"],
+			origin: ["http://localhost:5173", "https://ifoodhelper.vercel.app"],
 			exposedHeaders: "Access-Control-Allow-Origin",
 		})
 	);
