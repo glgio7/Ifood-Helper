@@ -3,28 +3,24 @@ import { MarkersContext } from "../contexts/MarkersContext";
 
 export const useMarkers = () => {
 	const {
-		addMarkerPosition,
+		addNewMarkerPosition,
 		markers,
 		currentLocation,
 		setMarkers,
-		currentMarker,
-		setCurrentMarker,
+		markerDetails,
+		setMarkerDetails,
 		newMarker,
 		setNewMarker,
-		coords,
-		setCoords,
 	} = useContext(MarkersContext);
 
 	return {
-		addMarkerPosition,
+		addNewMarkerPosition,
 		markers,
 		currentLocation,
 		setMarkers,
-		currentMarker,
-		setCurrentMarker,
+		markerDetails,
+		setMarkerDetails,
 		newMarker,
 		setNewMarker,
-		coords,
-		setCoords,
 	};
 };

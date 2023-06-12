@@ -5,15 +5,13 @@ export type Coords = { lat: number; lng: number };
 
 export interface IMarkersContext {
 	markers: IMarker[];
-	currentLocation: IMarker | null;
 	setMarkers: React.Dispatch<React.SetStateAction<IMarker[]>>;
-	currentMarker: IMarker | null;
-	setCurrentMarker: React.Dispatch<React.SetStateAction<IMarker | null>>;
+	addNewMarkerPosition: (coords: Coords) => Promise<boolean | undefined>;
 	newMarker: IMarker | null;
 	setNewMarker: React.Dispatch<React.SetStateAction<IMarker | null>>;
-	coords: Coords;
-	setCoords: React.Dispatch<React.SetStateAction<Coords>>;
-	addMarkerPosition: (coords: Coords) => Promise<boolean | undefined>;
+	currentLocation: IMarker | null;
+	markerDetails: IMarker | null;
+	setMarkerDetails: React.Dispatch<React.SetStateAction<IMarker | null>>;
 }
 
 export type MarkersProvidersProps = {

@@ -2,11 +2,11 @@ import "leaflet/dist/leaflet.css";
 import * as S from "./styles";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import { MapContainer, TileLayer } from "react-leaflet";
-import { AddMarkerListener } from "../../utils/addMarker";
+import { AddMarkerListener } from "../../utils/addMarkerListener";
 import Loading from "../../components/Loading";
 import Marker from "../../components/Marker";
 import Popup from "../../components/Popup";
-import { createCustomIcon } from "../../utils/addIcon";
+import { createCustomIcon } from "../../utils/addCustomIcon";
 import { useMarkers } from "../../hooks/useMarkers";
 import { IMarker } from "../../components/Marker/types";
 import { useInterface } from "../../hooks/useInterface";
@@ -33,7 +33,7 @@ const Home = () => {
 							url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 						/>
 						<MarkerClusterGroup chunkedLoading>
-							{/* // Current Location Markers */}
+							{/* // Current Location Marker */}
 
 							<Marker
 								position={currentLocation.position}

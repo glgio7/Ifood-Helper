@@ -4,12 +4,12 @@ import { useMarkers } from "../../hooks/useMarkers";
 import { useInterface } from "../../hooks/useInterface";
 
 const Marker = ({ marker, ...otherProps }: MyMarkerProps) => {
-	const { setCurrentMarker } = useMarkers();
+	const { setMarkerDetails } = useMarkers();
 	const { setPopup } = useInterface();
 
 	const handleMarkerClick = () => {
 		setPopup(true);
-		setCurrentMarker(marker);
+		setMarkerDetails(marker);
 	};
 
 	return (

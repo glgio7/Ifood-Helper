@@ -12,10 +12,9 @@ const MarkersProvider = ({ children }: MarkersProvidersProps) => {
 	const [currentLocation, setCurrentLocation] = useState<IMarker | null>(null);
 
 	// Gonna be renamed as markerDetails, setMarkerDetails
-	const [currentMarker, setCurrentMarker] = useState<IMarker | null>(null);
+	const [markerDetails, setMarkerDetails] = useState<IMarker | null>(null);
 
 	const [newMarker, setNewMarker] = useState<IMarker | null>(null);
-	const [coords, setCoords] = useState<Coords>({} as Coords);
 
 	useEffect(() => {
 		const url = `${import.meta.env.VITE_APP_API_URL}/markers`;
@@ -47,41 +46,36 @@ const MarkersProvider = ({ children }: MarkersProvidersProps) => {
 		updateCurrentLocation();
 	}, []);
 
-	const addMarkerPosition = useCallback(
-		async (coords: Coords) => {
-			const { lat, lng } = coords;
+	const addNewMarkerPosition = useCallback(async (coords: Coords) => {
+		const { lat, lng } = coords;
 
-			if (lat && lng)
-				try {
-					const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
-					const response = await fetch(url);
-					const data = await response.json();
-					const street = data.display_name.split(",")[0];
+		if (lat && lng)
+			try {
+				const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`;
+				const response = await fetch(url);
+				const data = await response.json();
+				const street = data.display_name.split(",")[0];
 
-					const confirmation = window.confirm(
-						`Adicionar marcador em ${street}?`
-					);
+				const confirmation = window.confirm(`Adicionar marcador em ${street}?`);
 
-					return confirmation ? true : false;
-				} catch (error) {
-					alert("Ocorreu um erro.");
-					console.log("Ocorreu um erro:", error);
-				}
-		},
-		[coords]
-	);
+				return confirmation ? true : false;
+			} catch (error) {
+				alert("Ocorreu um erro.");
+				console.log("Ocorreu um erro:", error);
+			}
+	}, []);
+
+	console.log(newMarker);
 
 	const contextValue = {
 		markers,
 		setMarkers,
 		currentLocation,
-		currentMarker,
-		setCurrentMarker,
+		markerDetails,
+		setMarkerDetails,
 		newMarker,
 		setNewMarker,
-		coords,
-		setCoords,
-		addMarkerPosition,
+		addNewMarkerPosition,
 	};
 
 	return (

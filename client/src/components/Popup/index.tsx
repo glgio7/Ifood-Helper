@@ -8,7 +8,7 @@ import axios from "axios";
 import { useState } from "react";
 
 const Popup = () => {
-	const { setNewMarker, currentMarker, setMarkers, newMarker } = useMarkers();
+	const { setNewMarker, markerDetails, setMarkers, newMarker } = useMarkers();
 
 	const { popup, setPopup } = useInterface();
 
@@ -75,17 +75,17 @@ const Popup = () => {
 					setPopup(!popup);
 				}}
 			/>
-			{currentMarker && (
+			{markerDetails && (
 				<>
-					<img className="event-icon" src={currentMarker.icon.iconUrl} />
-					<h6 className="new-alert">{currentMarker.icon.label}</h6>
-					{currentMarker.icon.iconUrl !== "/icons/current-icon.svg" && (
+					<img className="event-icon" src={markerDetails.icon.iconUrl} />
+					<h6 className="new-alert">{markerDetails.icon.label}</h6>
+					{markerDetails.icon.iconUrl !== "/icons/current-icon.svg" && (
 						<>
 							<span>Comentário:</span>
 						</>
 					)}
-					<span>{currentMarker.comment}</span>
-					{currentMarker.icon.iconUrl !== "/icons/current-icon.svg" && (
+					<span>{markerDetails.comment}</span>
+					{markerDetails.icon.iconUrl !== "/icons/current-icon.svg" && (
 						<h6 className="new-alert">Enviado por: {`@admin`}</h6>
 					)}
 				</>
