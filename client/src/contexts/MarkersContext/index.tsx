@@ -11,7 +11,6 @@ const MarkersProvider = ({ children }: MarkersProvidersProps) => {
 	const [markers, setMarkers] = useState<IMarker[]>([]);
 	const [currentLocation, setCurrentLocation] = useState<IMarker | null>(null);
 
-	// Gonna be renamed as markerDetails, setMarkerDetails
 	const [markerDetails, setMarkerDetails] = useState<IMarker | null>(null);
 
 	const [newMarker, setNewMarker] = useState<IMarker | null>(null);
@@ -64,8 +63,6 @@ const MarkersProvider = ({ children }: MarkersProvidersProps) => {
 				console.log("Ocorreu um erro:", error);
 			}
 	}, []);
-
-	console.log(newMarker);
 
 	const contextValue = {
 		markers,

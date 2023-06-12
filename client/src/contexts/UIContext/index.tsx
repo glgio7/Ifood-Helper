@@ -1,11 +1,14 @@
 import { createContext, useState } from "react";
 import { IUIContext, UIProviderProps } from "./types";
+import { INewMarkerPosition } from "../../components/LoadingNewMarker/types";
 
 export const UIContext = createContext<IUIContext>({} as IUIContext);
 
 const UIProvider = ({ children }: UIProviderProps) => {
+	const [markerPosition, setMarkerPosition] =
+		useState<INewMarkerPosition | null>(null);
 	const [openMenu, setOpenMenu] = useState<boolean>(false);
-	const [loadingMarker, setLoadingMarker] = useState<boolean>(false);
+	const [loadingNewMarker, setLoadingNewMarker] = useState<boolean>(false);
 	const [popup, setPopup] = useState<boolean>(false);
 
 	const contextValue = {
@@ -13,8 +16,10 @@ const UIProvider = ({ children }: UIProviderProps) => {
 		setPopup,
 		openMenu,
 		setOpenMenu,
-		loadingMarker,
-		setLoadingMarker,
+		loadingNewMarker,
+		setLoadingNewMarker,
+		markerPosition,
+		setMarkerPosition,
 	};
 
 	return (
