@@ -21,10 +21,12 @@
 		"mongodb": "^5.6.0"
 	},
 	"devDependencies": {
+		"axios": "^1.4.0",
+		"@types/axios": "^0.14.0",
 		"@types/cors": "^2.8.13",
 		"@types/express": "^4.17.17",
-		"@types/node": "^18.16.16",
 		"ts-node-dev": "^2.0.0",
+		"@types/node": "^18.16.16",
 		"vitest": "^0.32.0"
 	}
 }
