@@ -13,7 +13,12 @@ export class GetMarkersController implements IGetMarkersController {
 				body: markers,
 			};
 		} catch (error) {
-			console.log(error);
+			if (error instanceof Error) {
+				return {
+					statusCode: 500,
+					body: error.message,
+				};
+			}
 
 			return {
 				statusCode: 500,
