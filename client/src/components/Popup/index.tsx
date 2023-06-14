@@ -1,11 +1,12 @@
 import * as S from "./styles";
+import axios from "axios";
 import { RiCloseFill } from "react-icons/ri";
 import { icons } from "../../constants/icons";
 import { useMarkers } from "../../hooks/useMarkers";
 import { useInterface } from "../../hooks/useInterface";
 import { IMarker } from "../Marker/types";
-import axios from "axios";
 import { useState } from "react";
+import { currentDate } from "../../utils/getCurrentDate";
 
 const Popup = () => {
 	const { setNewMarker, markerDetails, setMarkers, newMarker } = useMarkers();
@@ -48,15 +49,17 @@ const Popup = () => {
 		axios
 			.post(url, {
 				icon: { iconUrl: newMarker.icon.iconUrl, label: newMarker.icon.label },
-				author: "user",
+				author: "admin",
 				comment: comment,
 				position: { lat: newMarker.position.lat, lng: newMarker.position.lng },
+				createdAt: currentDate,
 			})
 			.then((response) => {
-				const { comment, icon, position } = response.data;
+				const { comment, icon, position, createdAt, author }: IMarker =
+					response.data;
 				setPopup(!popup);
 				setMarkers((markers) => {
-					return [...markers, { comment, icon, position }];
+					return [...markers, { comment, icon, position, createdAt, author }];
 				});
 				setNewMarker(null);
 			})
@@ -86,7 +89,14 @@ const Popup = () => {
 					)}
 					<span>{markerDetails.comment}</span>
 					{markerDetails.icon.iconUrl !== "/icons/current-icon.svg" && (
-						<h6 className="new-alert">Enviado por: {`@admin`}</h6>
+						<>
+							<h6 className="new-alert">
+								Enviado por: {`@${markerDetails.author}`}
+							</h6>
+							<span>{`em ${
+								markerDetails.createdAt || "horário indefindo."
+							} `}</span>
+						</>
 					)}
 				</>
 			)}

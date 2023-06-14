@@ -9,8 +9,9 @@ type IMarkerPosition = {
 };
 
 export interface IMarker {
+	author: string;
+	createdAt: string;
 	icon: IMarkerIcon;
 	position: IMarkerPosition;
-	author: string;
 	comment: string;
 }

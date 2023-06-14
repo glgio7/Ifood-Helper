@@ -12,9 +12,15 @@ export class CreateMarkerController implements ICreateMarkerController {
 		httpRequest: HttpRequest<IMarker>
 	): Promise<HttpResponse<IMarker>> {
 		try {
-			const { author, comment, icon, position } = httpRequest.body;
+			const { author, comment, icon, position, createdAt } = httpRequest.body;
 
-			const newMarker = new Marker({ author, comment, icon, position });
+			const newMarker = new Marker({
+				author,
+				comment,
+				icon,
+				position,
+				createdAt,
+			});
 
 			const marker = await this.createMarkerRepositoy.createMarker(newMarker);
 

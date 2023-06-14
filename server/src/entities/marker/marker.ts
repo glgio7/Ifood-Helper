@@ -4,7 +4,13 @@ export class Marker implements IMarker {
 	private props: IMarker;
 
 	constructor(props: IMarker) {
-		const requiredFields = ["icon", "position", "author", "comment"];
+		const requiredFields = [
+			"icon",
+			"position",
+			"author",
+			"comment",
+			"createdAt",
+		];
 
 		for (const field of requiredFields) {
 			if (
@@ -31,6 +37,9 @@ export class Marker implements IMarker {
 	}
 	get position() {
 		return this.props.position;
+	}
+	get createdAt() {
+		return this.props.createdAt;
 	}
 	get author() {
 		return this.props.author;

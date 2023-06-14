@@ -4,7 +4,7 @@ import { ICreateMarkerRepository } from "../../use-cases/create-marker/protocols
 
 export class CreateMarkerRepositoy implements ICreateMarkerRepository {
 	async createMarker(params: IMarker): Promise<IMarker> {
-		const { position, author, comment, icon } = params;
+		const { position, author, comment, icon, createdAt } = params;
 
 		const markerAlreadyExists = await MongoClientMarkers.db
 			.collection("markers")
@@ -16,16 +16,16 @@ export class CreateMarkerRepositoy implements ICreateMarkerRepository {
 
 		const { insertedId } = await MongoClientMarkers.db
 			.collection("markers")
-			.insertOne({ position, author, comment, icon });
+			.insertOne({ position, author, comment, icon, createdAt });
 
-		const marker = await MongoClientMarkers.db
+		const createdMarker = await MongoClientMarkers.db
 			.collection<Omit<IMarker, "id">>("markers")
 			.findOne({ _id: insertedId });
 
-		if (!marker) {
+		if (!createdMarker) {
 			throw new Error("Marker not created!");
 		}
 
-		return marker;
+		return createdMarker;
 	}
 }
