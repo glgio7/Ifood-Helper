@@ -8,20 +8,15 @@ import UIProvider from "./contexts/UIContext";
 function App() {
 	return (
 		<BrowserRouter>
-			<UIProvider>
-				<Header />
-				<Routes>
-					<Route
-						path="/"
-						element={
-							<MarkersProvider>
-								<Home />
-							</MarkersProvider>
-						}
-					/>
-				</Routes>
-				<Footer />
-			</UIProvider>
+			<MarkersProvider>
+				<UIProvider>
+					<Header />
+					<Routes>
+						<Route path="/" element={<Home />} />
+					</Routes>
+					<Footer />
+				</UIProvider>
+			</MarkersProvider>
 		</BrowserRouter>
 	);
 }

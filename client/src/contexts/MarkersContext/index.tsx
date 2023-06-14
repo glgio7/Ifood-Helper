@@ -8,41 +8,34 @@ export const MarkersContext = createContext<IMarkersContext>(
 );
 
 const MarkersProvider = ({ children }: MarkersProvidersProps) => {
+	/////// State form Markers from database
 	const [markers, setMarkers] = useState<IMarker[]>([]);
+
+	/////// State to tracking and update location in every 3 seconds
+	const [gpsTracking, setGpsTracking] = useState<boolean>(false);
+
+	////// Single markers states
 	const [currentLocation, setCurrentLocation] = useState<IMarker | null>(null);
-
 	const [markerDetails, setMarkerDetails] = useState<IMarker | null>(null);
-
 	const [newMarker, setNewMarker] = useState<IMarker | null>(null);
 
-	useEffect(() => {
-		const url = `${import.meta.env.VITE_APP_API_URL}/markers`;
-		axios.get(url).then((response) => {
-			const { data } = response;
-			setMarkers(data);
+	/////// Functions
+	const updateCurrentLocation = useCallback(() => {
+		navigator.geolocation.getCurrentPosition((position) => {
+			const lat = position.coords.latitude;
+			const lng = position.coords.longitude;
+
+			const current: IMarker = {
+				icon: {
+					iconUrl: "/icons/current-icon.svg",
+					label: "Localização atual.",
+				},
+				comment: "Você está aqui.",
+				position: { lat, lng },
+			};
+
+			setCurrentLocation(current);
 		});
-	}, []);
-
-	useEffect(() => {
-		const updateCurrentLocation = () => {
-			navigator.geolocation.getCurrentPosition((position) => {
-				const lat = position.coords.latitude;
-				const lng = position.coords.longitude;
-
-				const current: IMarker = {
-					icon: {
-						iconUrl: "/icons/current-icon.svg",
-						label: "Localização atual.",
-					},
-					comment: "Você está aqui.",
-					position: { lat, lng },
-				};
-
-				setCurrentLocation(current);
-			});
-		};
-
-		updateCurrentLocation();
 	}, []);
 
 	const addNewMarkerPosition = useCallback(async (coords: Coords) => {
@@ -64,6 +57,27 @@ const MarkersProvider = ({ children }: MarkersProvidersProps) => {
 			}
 	}, []);
 
+	/////// useEffects
+	useEffect(() => {
+		const url = `${import.meta.env.VITE_APP_API_URL}/markers`;
+		axios.get(url).then((response) => {
+			const { data } = response;
+			setMarkers(data);
+		});
+	}, []);
+
+	useEffect(() => {
+		updateCurrentLocation();
+
+		if (gpsTracking) {
+			const interval = setInterval(updateCurrentLocation, 3000);
+
+			return () => {
+				clearInterval(interval);
+			};
+		}
+	}, [gpsTracking]);
+
 	const contextValue = {
 		markers,
 		setMarkers,
@@ -73,6 +87,8 @@ const MarkersProvider = ({ children }: MarkersProvidersProps) => {
 		newMarker,
 		setNewMarker,
 		addNewMarkerPosition,
+		gpsTracking,
+		setGpsTracking,
 	};
 
 	return (

@@ -10,8 +10,11 @@ export interface IMarkersContext {
 	newMarker: IMarker | null;
 	setNewMarker: React.Dispatch<React.SetStateAction<IMarker | null>>;
 	currentLocation: IMarker | null;
+
 	markerDetails: IMarker | null;
 	setMarkerDetails: React.Dispatch<React.SetStateAction<IMarker | null>>;
+	gpsTracking: boolean;
+	setGpsTracking: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export type MarkersProvidersProps = {
