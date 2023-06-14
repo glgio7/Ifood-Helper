@@ -1,9 +1,9 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./pages/Index";
+import { BrowserRouter } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import MarkersProvider from "./contexts/MarkersContext";
 import UIProvider from "./contexts/UIContext";
+import AppRoutes from "./routes";
 
 function App() {
 	return (
@@ -11,9 +11,7 @@ function App() {
 			<MarkersProvider>
 				<UIProvider>
 					<Header />
-					<Routes>
-						<Route path="/" element={<Home />} />
-					</Routes>
+					<AppRoutes />
 					<Footer />
 				</UIProvider>
 			</MarkersProvider>
