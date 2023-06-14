@@ -2,29 +2,23 @@ import { useInterface } from "../../hooks/useInterface";
 import * as S from "./styles";
 import { Link } from "react-router-dom";
 import { useMarkers } from "../../hooks/useMarkers";
+import { navLinks } from "../../constants/navlinks";
 
 const Navbar = () => {
 	const { openMenu, setOpenMenu } = useInterface();
 	const { gpsTracking, setGpsTracking } = useMarkers();
 
-	const navLinks = [
-		{
-			span: "Início",
-			href: "/",
-		},
-		{
-			span: "Score",
-			href: "/",
-		},
-		{
-			span: "Ajuda",
-			href: "/",
-		},
-		{
-			span: "Sobre",
-			href: "/sobre",
-		},
-	];
+	const handleGpsTracking = () => {
+		setOpenMenu(false);
+		if (gpsTracking === false) {
+			const confirmed = window.confirm(
+				"A atualização automática poderá consumir mais dados de sua internet, deseja continuar?"
+			);
+			confirmed && setGpsTracking(true);
+		} else {
+			setGpsTracking(false);
+		}
+	};
 
 	return (
 		<>
@@ -43,19 +37,7 @@ const Navbar = () => {
 
 				<button className="auth-btn">Entrar</button>
 				<S.GpsTracking active={gpsTracking}>
-					<button
-						className="switcher-btn"
-						onClick={() => {
-							if (gpsTracking === false) {
-								const confirmed = window.confirm(
-									"A atualização automática poderá consumir mais dados de sua internet, deseja continuar?"
-								);
-								confirmed && setGpsTracking(true);
-							} else {
-								setGpsTracking(false);
-							}
-						}}
-					/>
+					<button className="switcher-btn" onClick={handleGpsTracking} />
 					<span className="switcher-span">{gpsTracking ? "ON" : "OFF"}</span>
 					<span> Localização automática</span>
 				</S.GpsTracking>

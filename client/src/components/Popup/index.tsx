@@ -1,6 +1,6 @@
 import * as S from "./styles";
 import { RiCloseFill } from "react-icons/ri";
-import { icons } from "../../utils/icons";
+import { icons } from "../../constants/icons";
 import { useMarkers } from "../../hooks/useMarkers";
 import { useInterface } from "../../hooks/useInterface";
 import { IMarker } from "../Marker/types";

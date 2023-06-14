@@ -34,7 +34,10 @@ export const About = styled.main`
 
 	p {
 		margin-block: 0.5rem;
-		text-align: center;
 		max-width: 90%;
+
+		&:last-child {
+			text-align: center;
+		}
 	}
 `;

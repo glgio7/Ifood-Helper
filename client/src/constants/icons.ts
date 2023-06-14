@@ -1,5 +1,3 @@
-//Icons
-
 import { IMarkerIcon } from "./types";
 
 export const icons: IMarkerIcon[] = [

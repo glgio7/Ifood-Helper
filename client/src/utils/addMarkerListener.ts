@@ -1,6 +1,6 @@
 import { useMapEvents } from "react-leaflet";
 import { useMarkers } from "../hooks/useMarkers";
-import { icons } from "./icons";
+import { icons } from "../constants/icons";
 import { useInterface } from "../hooks/useInterface";
 
 export const AddMarkerListener = () => {
