@@ -2,6 +2,7 @@ import { createContext, useCallback, useEffect, useState } from "react";
 import { IMarker } from "../../components/Marker/types";
 import { Coords, IMarkersContext, MarkersProvidersProps } from "./types";
 import axios from "axios";
+import { currentDate } from "../../utils/getCurrentDate";
 
 export const MarkersContext = createContext<IMarkersContext>(
 	{} as IMarkersContext
@@ -32,6 +33,8 @@ const MarkersProvider = ({ children }: MarkersProvidersProps) => {
 				},
 				comment: "Você está aqui.",
 				position: { lat, lng },
+				author: "admin",
+				createdAt: currentDate,
 			};
 
 			setCurrentLocation(current);

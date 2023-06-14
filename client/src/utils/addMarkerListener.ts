@@ -2,6 +2,7 @@ import { useMapEvents } from "react-leaflet";
 import { useMarkers } from "../hooks/useMarkers";
 import { icons } from "../constants/icons";
 import { useInterface } from "../hooks/useInterface";
+import { currentDate } from "./getCurrentDate";
 
 export const AddMarkerListener = () => {
 	const { addNewMarkerPosition, setMarkerDetails, setNewMarker } = useMarkers();
@@ -24,6 +25,8 @@ export const AddMarkerListener = () => {
 						comment: "",
 						icon: icons[0],
 						position: { lat: lat, lng: lng },
+						author: "admin",
+						createdAt: currentDate,
 					});
 
 					setMarkerDetails(null);
