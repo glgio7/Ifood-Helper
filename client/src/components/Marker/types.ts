@@ -1,6 +1,6 @@
 import { MarkerProps } from "react-leaflet";
-import { IMarkerIcon } from "../../utils/types";
 import { Coords } from "../../contexts/MarkersContext/types";
+import { IMarkerIcon } from "../../constants/types";
 
 export interface IMarker {
 	icon: IMarkerIcon;
