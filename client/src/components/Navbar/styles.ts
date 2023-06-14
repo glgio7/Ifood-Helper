@@ -13,6 +13,8 @@ export const Navbar = styled.nav<{ active: boolean }>`
 
 	.nav-links {
 		display: inline-flex;
+		justify-content: center;
+		min-width: 45%;
 	}
 
 	a {
@@ -37,10 +39,6 @@ export const Navbar = styled.nav<{ active: boolean }>`
 		font-weight: bold;
 
 		border-radius: 4px;
-	}
-
-	.gps-tracking {
-		display: none;
 	}
 
 	@media screen and (max-width: 768px) {

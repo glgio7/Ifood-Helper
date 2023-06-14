@@ -22,7 +22,7 @@ const Navbar = () => {
 		},
 		{
 			span: "Sobre",
-			href: "/",
+			href: "/sobre",
 		},
 	];
 
