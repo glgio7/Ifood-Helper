@@ -1,10 +1,12 @@
 import { createContext, useState } from "react";
-import { IUIContext, UIProviderProps } from "./types";
+import { IInterfaceContext, InterfaceProviderProps } from "./types";
 import { INewMarkerPosition } from "../../components/LoadingNewMarker/types";
 
-export const UIContext = createContext<IUIContext>({} as IUIContext);
+export const InterfaceContext = createContext<IInterfaceContext>(
+	{} as IInterfaceContext
+);
 
-const UIProvider = ({ children }: UIProviderProps) => {
+const InterfaceProvider = ({ children }: InterfaceProviderProps) => {
 	const [markerPosition, setMarkerPosition] =
 		useState<INewMarkerPosition | null>(null);
 	const [openMenu, setOpenMenu] = useState<boolean>(false);
@@ -23,8 +25,10 @@ const UIProvider = ({ children }: UIProviderProps) => {
 	};
 
 	return (
-		<UIContext.Provider value={contextValue}>{children}</UIContext.Provider>
+		<InterfaceContext.Provider value={contextValue}>
+			{children}
+		</InterfaceContext.Provider>
 	);
 };
 
-export default UIProvider;
+export default InterfaceProvider;

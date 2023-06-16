@@ -1,5 +1,5 @@
 import { useCallback, useContext } from "react";
-import { UIContext } from "../contexts/UIContext";
+import { InterfaceContext } from "../contexts/InterfaceContext";
 
 export const useInterface = () => {
 	const {
@@ -11,7 +11,7 @@ export const useInterface = () => {
 		setLoadingNewMarker,
 		markerPosition,
 		setMarkerPosition,
-	} = useContext(UIContext);
+	} = useContext(InterfaceContext);
 
 	const handleLoadingMarker = useCallback(
 		(mouseX: number, mouseY: number) => {

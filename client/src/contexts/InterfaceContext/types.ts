@@ -1,7 +1,7 @@
 import React, { SetStateAction } from "react";
 import { INewMarkerPosition } from "../../components/LoadingNewMarker/types";
 
-export interface IUIContext {
+export interface IInterfaceContext {
 	markerPosition: INewMarkerPosition | null;
 	setMarkerPosition: React.Dispatch<SetStateAction<INewMarkerPosition | null>>;
 
@@ -15,6 +15,6 @@ export interface IUIContext {
 	setLoadingNewMarker: React.Dispatch<SetStateAction<boolean>>;
 }
 
-export type UIProviderProps = {
+export type InterfaceProviderProps = {
 	children: React.ReactNode;
 };
