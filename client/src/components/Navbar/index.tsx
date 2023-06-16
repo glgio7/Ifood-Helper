@@ -23,11 +23,12 @@ const Navbar = () => {
 	return (
 		<>
 			<S.Navbar active={openMenu}>
-				<div className="nav-links">
+				<div className="links">
 					{navLinks.map((navlink) => (
 						<Link
 							key={navlink.span}
 							to={navlink.href}
+							className="links__a"
 							onClick={() => setOpenMenu(false)}
 						>
 							{navlink.span}
@@ -35,7 +36,9 @@ const Navbar = () => {
 					))}
 				</div>
 
-				<button className="auth-btn">Entrar</button>
+				<Link to={"/auth"}>
+					<button className="auth-btn">Entrar</button>
+				</Link>
 				<S.GpsTracking active={gpsTracking}>
 					<button className="switcher-btn" onClick={handleGpsTracking} />
 					<span className="switcher-span">{gpsTracking ? "ON" : "OFF"}</span>

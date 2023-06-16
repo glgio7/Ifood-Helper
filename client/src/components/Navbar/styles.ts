@@ -11,13 +11,13 @@ export const Navbar = styled.nav<{ active: boolean }>`
 
 	color: #dd2222;
 
-	.nav-links {
+	.links {
 		display: inline-flex;
 		justify-content: center;
 		min-width: 45%;
 	}
 
-	a {
+	.links__a {
 		margin-inline: 1.5rem;
 
 		font-weight: 500;
@@ -66,13 +66,13 @@ export const Navbar = styled.nav<{ active: boolean }>`
 
 		transition: all 300ms;
 
-		.nav-links {
+		.links {
 			height: 90%;
 			flex-direction: column;
 			justify-content: space-evenly;
 			align-items: center;
 		}
-		a {
+		.links__a {
 			font-weight: 600;
 		}
 
