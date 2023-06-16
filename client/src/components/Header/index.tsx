@@ -11,7 +11,12 @@ const Header = () => {
 	const navigate = useNavigate();
 	return (
 		<S.Header>
-			<h1 onClick={() => navigate("/")}>
+			<h1
+				onClick={() => {
+					navigate("/");
+					setOpenMenu(false);
+				}}
+			>
 				<span>ifood</span>
 				<img src={icon} alt="" className="logo-icon" />
 				<span>helper</span>

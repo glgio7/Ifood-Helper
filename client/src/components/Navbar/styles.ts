@@ -36,6 +36,10 @@ export const Navbar = styled.nav<{ active: boolean }>`
 		color: #fff;
 		background-color: #dd2222;
 
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+
 		font-weight: bold;
 
 		border-radius: 4px;

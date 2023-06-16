@@ -35,9 +35,12 @@ const Navbar = () => {
 						</Link>
 					))}
 				</div>
-
-				<Link to={"/auth"}>
-					<button className="auth-btn">Entrar</button>
+				<Link
+					to={"/auth"}
+					className="auth-btn"
+					onClick={() => setOpenMenu(false)}
+				>
+					Entrar
 				</Link>
 				<S.GpsTracking active={gpsTracking}>
 					<button className="switcher-btn" onClick={handleGpsTracking} />
