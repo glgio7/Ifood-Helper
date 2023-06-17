@@ -1,16 +1,27 @@
 import { useMapEvents } from "react-leaflet";
 import { useMarkers } from "../hooks/useMarkers";
-import { icons } from "../constants/icons";
+import { icons } from "../constants/markersIcons";
 import { useInterface } from "../hooks/useInterface";
 import { currentDate } from "./getCurrentDate";
+import { useAuth } from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 export const AddMarkerListener = () => {
 	const { addNewMarkerPosition, setMarkerDetails, setNewMarker } = useMarkers();
+
+	const { authenticated } = useAuth();
+
+	const navigate = useNavigate();
 
 	const { setPopup, setLoadingNewMarker, handleLoadingMarker } = useInterface();
 
 	useMapEvents({
 		click(event) {
+			if (!authenticated) {
+				navigate("/auth");
+				return;
+			}
+
 			const lat = event.latlng.lat;
 			const lng = event.latlng.lng;
 
@@ -20,6 +31,8 @@ export const AddMarkerListener = () => {
 			);
 
 			addNewMarkerPosition({ lat, lng }).then((confirmed) => {
+				setLoadingNewMarker(false);
+
 				if (confirmed) {
 					setNewMarker({
 						comment: "",
@@ -32,7 +45,6 @@ export const AddMarkerListener = () => {
 					setMarkerDetails(null);
 					setPopup(true);
 				}
-				setLoadingNewMarker(false);
 			});
 		},
 	});
