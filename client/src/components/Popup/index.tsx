@@ -1,7 +1,7 @@
 import * as S from "./styles";
 import axios from "axios";
 import { RiCloseFill } from "react-icons/ri";
-import { icons } from "../../constants/icons";
+import { icons } from "../../constants/markersIcons";
 import { useMarkers } from "../../hooks/useMarkers";
 import { useInterface } from "../../hooks/useInterface";
 import { IMarker } from "../Marker/types";

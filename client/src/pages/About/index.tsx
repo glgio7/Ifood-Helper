@@ -3,7 +3,7 @@ import * as S from "./styles";
 const About = () => {
 	return (
 		<S.About>
-			<img src="/images/about.svg" alt="Sobre" className="title-image" />
+			<img src="/images/about.png" alt="Sobre" className="title-image" />
 			<h2>Sobre o aplicativo</h2>
 			<p>
 				O Ifood Helper foi projetado para ajudar você a{" "}
