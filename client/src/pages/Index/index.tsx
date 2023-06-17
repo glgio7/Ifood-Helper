@@ -55,9 +55,13 @@ const Home = () => {
 								);
 							})}
 						</MarkerClusterGroup>
+
+						{/* // Add Marker Listener */}
 						<AddMarkerListener />
 					</MapContainer>
+
 					<Popup />
+
 					{loadingNewMarker && <LoadingNewMarker position={markerPosition} />}
 				</S.Container>
 			)}
