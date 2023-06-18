@@ -6,7 +6,3 @@ export interface ICreateUserController {
 		httpRequest: HttpRequest<Omit<IUser, "createdAt">>
 	): Promise<HttpResponse<IUser>>;
 }
-
-export interface ICreateUserRepository {
-	createUser(params: IUser): Promise<IUser>;
-}

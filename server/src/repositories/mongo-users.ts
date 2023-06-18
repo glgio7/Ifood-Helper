@@ -1,8 +1,23 @@
 import { MongoClientUsers } from "../database/mongo";
 import { IUser } from "../entities/user/protocols";
-import { ICreateUserRepository } from "../use-cases/users/create-user/protocols";
+import { IAuthWithEmail, IUserRepository } from "./protocols";
 
-export class CreateUserRepository implements ICreateUserRepository {
+export class UserRepository implements IUserRepository {
+	async authWithEmail(
+		params: IAuthWithEmail
+	): Promise<Omit<IUser, "password">> {
+		const { email, password } = params;
+		const user = await MongoClientUsers.db
+			.collection<IUser>("users")
+			.findOne({ email });
+
+		if (!user || user.password !== password) {
+			throw new Error("Credenciais inválidas.");
+		}
+
+		return user;
+	}
+
 	async createUser(params: IUser): Promise<IUser> {
 		const { email, username, createdAt, name, score, password } = params;
 
