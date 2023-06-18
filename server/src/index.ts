@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import { MongoClientMarkers } from "./database/mongo";
+import { MongoClientMarkers, MongoClientUsers } from "./database/mongo";
 import { createRoutes } from "./routes/router";
 
 const main = async () => {
@@ -21,6 +21,7 @@ const main = async () => {
 	app.use("/", createRoutes());
 
 	await MongoClientMarkers.connect();
+	await MongoClientUsers.connect();
 
 	app.listen(port, () => {
 		console.log(`Server is running on port ${port}`);
