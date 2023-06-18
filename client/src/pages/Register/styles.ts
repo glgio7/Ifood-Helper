@@ -63,7 +63,7 @@ export const Register = styled.main`
 
 	.auth-btn {
 		height: 4rem;
-		width: 50%;
+		width: 60%;
 
 		margin-bottom: 1rem;
 

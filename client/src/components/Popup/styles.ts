@@ -82,8 +82,7 @@ export const CustomPopup = styled.div<{ active: string }>`
 		align-items: center;
 		justify-content: center;
 	}
-	select,
-	input {
+	select {
 		background-color: #333;
 
 		min-height: 40px;
@@ -113,10 +112,9 @@ export const CustomPopup = styled.div<{ active: string }>`
 		border-radius: 0;
 
 		select,
-		input,
 		.new-alert,
 		.submit-btn {
-			width: 100%;
+			width: 90%;
 		}
 	}
 `;
