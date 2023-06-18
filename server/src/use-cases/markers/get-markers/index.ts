@@ -1,12 +1,13 @@
-import { IMarker } from "../../entities/marker/protocols";
-import { HttpResponse } from "../protocols";
-import { IGetMarkersController, IGetMarkersRepository } from "./protocols";
+import { IMarker } from "../../../entities/marker/protocols";
+import { IMarkersRepository } from "../../../repositories/protocols";
+import { HttpResponse } from "../../protocols";
+import { IGetMarkersController } from "./protocols";
 
 export class GetMarkersController implements IGetMarkersController {
-	constructor(private readonly getMarkersRepository: IGetMarkersRepository) {}
+	constructor(private readonly markersRepository: IMarkersRepository) {}
 	async handle(): Promise<HttpResponse<IMarker[]>> {
 		try {
-			const markers = await this.getMarkersRepository.getMarkers();
+			const markers = await this.markersRepository.getMarkers();
 
 			return {
 				statusCode: 200,

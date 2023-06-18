@@ -1,12 +1,11 @@
-import { Marker } from "../../entities/marker/marker";
-import { IMarker } from "../../entities/marker/protocols";
-import { HttpRequest, HttpResponse } from "../protocols";
-import { ICreateMarkerController, ICreateMarkerRepository } from "./protocols";
+import { Marker } from "../../../entities/marker/marker";
+import { IMarker } from "../../../entities/marker/protocols";
+import { IMarkersRepository } from "../../../repositories/protocols";
+import { HttpRequest, HttpResponse } from "../../protocols";
+import { ICreateMarkerController } from "./protocols";
 
 export class CreateMarkerController implements ICreateMarkerController {
-	constructor(
-		private readonly createMarkerRepositoy: ICreateMarkerRepository
-	) {}
+	constructor(private readonly markerRepositoy: IMarkersRepository) {}
 
 	async handle(
 		httpRequest: HttpRequest<IMarker>
@@ -22,7 +21,7 @@ export class CreateMarkerController implements ICreateMarkerController {
 				createdAt,
 			});
 
-			const marker = await this.createMarkerRepositoy.createMarker(newMarker);
+			const marker = await this.markerRepositoy.createMarker(newMarker);
 
 			return {
 				statusCode: 200,

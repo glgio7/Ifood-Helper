@@ -1,8 +1,17 @@
-import { MongoClientMarkers } from "../../database/mongo";
-import { IMarker } from "../../entities/marker/protocols";
-import { ICreateMarkerRepository } from "../../use-cases/create-marker/protocols";
+import { MongoClientMarkers } from "../database/mongo";
+import { IMarker } from "../entities/marker/protocols";
+import { IMarkersRepository } from "./protocols";
 
-export class CreateMarkerRepositoy implements ICreateMarkerRepository {
+export class MarkersRepository implements IMarkersRepository {
+	async getMarkers(): Promise<IMarker[]> {
+		const markers = await MongoClientMarkers.db
+			.collection<Omit<IMarker, "">>("markers")
+			.find({})
+			.toArray();
+
+		return markers.map(({ _id, ...marker }) => ({ ...marker }));
+	}
+
 	async createMarker(params: IMarker): Promise<IMarker> {
 		const { position, author, comment, icon, createdAt } = params;
 
