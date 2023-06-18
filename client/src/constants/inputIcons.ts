@@ -1,5 +1,10 @@
 import { IconType } from "react-icons";
-import { RiLockPasswordLine, RiMailLine, RiUser3Line } from "react-icons/ri";
+import {
+	RiLockPasswordLine,
+	RiMailLine,
+	RiUser3Line,
+	RiChat2Line,
+} from "react-icons/ri";
 
 interface InputIcon {
 	id: string;
@@ -10,6 +15,10 @@ export const inputIcons: InputIcon[] = [
 	{
 		id: "email",
 		icon: RiMailLine,
+	},
+	{
+		id: "comment",
+		icon: RiChat2Line,
 	},
 	{
 		id: "password",

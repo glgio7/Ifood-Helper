@@ -1,26 +1,22 @@
-import { useState } from "react";
+import axios from "axios";
 import { useInterface } from "../../hooks/useInterface";
 import { useMarkers } from "../../hooks/useMarkers";
 import { IMarker } from "../Marker/types";
-import axios from "axios";
 import { currentDate } from "../../utils/getCurrentDate";
 import { icons } from "../../constants/markersIcons";
+import InputContainer from "../InputContainer";
 
 const NewMarkerComponent = () => {
 	const { setNewMarker, setMarkers, newMarker } = useMarkers();
 	const { setPopup } = useInterface();
 
-	const [comment, setComment] = useState<string>("");
-
 	const handleChangeMarker = (prop: string, value: string, label?: string) => {
-		if (value) {
-			setNewMarker((prevState) => {
-				return {
-					...prevState!,
-					[prop]: value,
-				};
-			});
-		}
+		setNewMarker((prevState) => {
+			return {
+				...prevState!,
+				[prop]: value,
+			};
+		});
 
 		if (prop === "icon") {
 			setNewMarker((prevState) => {
@@ -35,46 +31,42 @@ const NewMarkerComponent = () => {
 		}
 	};
 
-	const handleAddMarker = (newMarker: IMarker) => {
-		const url = `${import.meta.env.VITE_APP_API_URL}/markers`;
+	const handleAddMarker = async (
+		e: React.FormEvent<HTMLFormElement>,
+		newMarker: IMarker
+	) => {
+		e.preventDefault();
 
 		if (newMarker.icon.label === "Selecionar") {
 			alert("Você precisa selecionar o tipo de alerta!");
 			return;
 		}
 
-		axios
-			.post(url, {
+		const url = `${import.meta.env.VITE_APP_API_URL}/markers`;
+		try {
+			const { data } = await axios.post(url, {
 				icon: { iconUrl: newMarker.icon.iconUrl, label: newMarker.icon.label },
 				author: "admin",
-				comment: comment,
+				comment: newMarker.comment,
 				position: { lat: newMarker.position.lat, lng: newMarker.position.lng },
 				createdAt: currentDate,
-			})
-			.then((response) => {
-				const { comment, icon, position, createdAt, author }: IMarker =
-					response.data;
-				setPopup("");
-				setMarkers((markers) => {
-					return [...markers, { comment, icon, position, createdAt, author }];
-				});
-				setNewMarker(null);
-			})
-			.catch((error) => {
-				console.log(error);
-				alert("Um erro aconteceu!");
 			});
+
+			setMarkers((markers) => {
+				return [...markers, data];
+			});
+			setPopup("");
+			setNewMarker(null);
+		} catch (error) {
+			console.log(error);
+			alert("Um erro aconteceu!");
+		}
 	};
 
 	return (
 		<>
 			<img className="event-icon" src={newMarker!.icon.iconUrl} />
-			<form
-				onSubmit={(e) => {
-					e.preventDefault();
-					handleAddMarker(newMarker!);
-				}}
-			>
+			<form onSubmit={(e) => handleAddMarker(e, newMarker!)}>
 				<h6 className="new-alert">Adicionar novo alerta</h6>
 				<label htmlFor="alert">Tipo</label>
 				<select
@@ -97,17 +89,16 @@ const NewMarkerComponent = () => {
 							</option>
 						))}
 				</select>
-				<label htmlFor="comment">Comentário</label>
-				<input
-					type="text"
+
+				<InputContainer
 					id="comment"
-					value={comment}
-					required
-					onChange={(e) => {
-						setComment(e.target.value);
-						handleChangeMarker("comment", comment);
+					type="text"
+					placeholder="Insira um comentário"
+					onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+						handleChangeMarker("comment", e.target.value);
 					}}
 				/>
+
 				<button type="submit" className="submit-btn">
 					Confirmar
 				</button>
