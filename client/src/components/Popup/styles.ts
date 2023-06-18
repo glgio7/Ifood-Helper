@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CustomPopup = styled.div<{ active: boolean }>`
+export const CustomPopup = styled.div<{ active: string }>`
 	position: absolute;
 	z-index: 10;
 

@@ -8,7 +8,7 @@ const Marker = ({ marker, ...otherProps }: MyMarkerProps) => {
 	const { setPopup } = useInterface();
 
 	const handleMarkerClick = () => {
-		setPopup(true);
+		setPopup("markerdetails");
 		setMarkerDetails(marker);
 	};
 

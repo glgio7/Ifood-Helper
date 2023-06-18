@@ -13,10 +13,13 @@ export const GlobalCSS = createGlobalStyle`
   list-style: none;
   
   border: none
+
 }
 :root {
   --header-height: 64px;
 }
+
+
 
 a{
   color: inherit;
@@ -31,6 +34,9 @@ button{
 }
 
 body{
+  -moz-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  
   font-family: 'Montserrat', sans-serif;
 
   position: relative;

@@ -11,7 +11,7 @@ const InterfaceProvider = ({ children }: InterfaceProviderProps) => {
 		useState<INewMarkerPosition | null>(null);
 	const [openMenu, setOpenMenu] = useState<boolean>(false);
 	const [loadingNewMarker, setLoadingNewMarker] = useState<boolean>(false);
-	const [popup, setPopup] = useState<boolean>(false);
+	const [popup, setPopup] = useState<string>("");
 
 	const contextValue = {
 		popup,

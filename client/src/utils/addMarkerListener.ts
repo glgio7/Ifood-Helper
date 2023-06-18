@@ -43,7 +43,7 @@ export const AddMarkerListener = () => {
 					});
 
 					setMarkerDetails(null);
-					setPopup(true);
+					setPopup("newmarker");
 				}
 			});
 		},

@@ -5,8 +5,8 @@ export interface IInterfaceContext {
 	markerPosition: INewMarkerPosition | null;
 	setMarkerPosition: React.Dispatch<SetStateAction<INewMarkerPosition | null>>;
 
-	popup: boolean;
-	setPopup: React.Dispatch<SetStateAction<boolean>>;
+	popup: string;
+	setPopup: React.Dispatch<SetStateAction<string>>;
 
 	openMenu: boolean;
 	setOpenMenu: React.Dispatch<SetStateAction<boolean>>;
