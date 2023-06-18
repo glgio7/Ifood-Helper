@@ -2,14 +2,25 @@ import * as S from "./styles";
 import { InputContainerProps } from "./types";
 import { inputIcons } from "../../constants/inputIcons";
 
-const InputContainer = ({ id, type, placeholder }: InputContainerProps) => {
+const InputContainer = ({
+	id,
+	type,
+	placeholder,
+	onChange,
+}: InputContainerProps) => {
 	const LabelIcon = inputIcons.find((icon) => icon.id === id)?.icon ?? null;
 
 	return (
 		<S.InputContainer>
 			{LabelIcon && <LabelIcon className={"icon-label"} />}
 
-			<input type={type} id={id} placeholder={placeholder} required />
+			<input
+				type={type}
+				id={id}
+				placeholder={placeholder}
+				onChange={onChange}
+				required
+			/>
 		</S.InputContainer>
 	);
 };

@@ -7,8 +7,18 @@ export const Login = () => {
 		<S.Login>
 			<img src={smile} alt="Ifood Helper" className="title-image" />
 			<form onSubmit={() => {}}>
-				<InputContainer id="email" type="text" placeholder="Email" />
-				<InputContainer id="password" type="password" placeholder="Senha" />
+				<InputContainer
+					id="email"
+					type="text"
+					placeholder="Email"
+					onChange={() => {}}
+				/>
+				<InputContainer
+					id="password"
+					type="password"
+					placeholder="Senha"
+					onChange={() => {}}
+				/>
 
 				<button type="submit" className="auth-btn login">
 					ENTRAR
