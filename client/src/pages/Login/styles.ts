@@ -17,6 +17,8 @@ export const Login = styled.main`
 	.title-image {
 		width: 240px;
 		aspect-ratio: 1;
+
+		margin-bottom: 2rem;
 	}
 
 	form {

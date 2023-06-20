@@ -5,7 +5,7 @@ export const AuthContext = createContext({} as IAuthContext);
 
 const AuthProvider = ({ children }: AuthProviderProps) => {
 	const [user, setUser] = useState<IUser | null>(null);
-	const [authenticated, setAuthenticated] = useState(true);
+	const [authenticated, setAuthenticated] = useState(false);
 
 	const contextValue = {
 		user,
