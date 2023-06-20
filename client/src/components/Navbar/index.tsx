@@ -3,10 +3,12 @@ import * as S from "./styles";
 import { Link } from "react-router-dom";
 import { useMarkers } from "../../hooks/useMarkers";
 import { navLinks } from "../../constants/navlinks";
+import { useAuth } from "../../hooks/useAuth";
 
 const Navbar = () => {
 	const { openMenu, setOpenMenu } = useInterface();
 	const { gpsTracking, setGpsTracking } = useMarkers();
+	const { authenticated, handleLogout } = useAuth();
 
 	const handleGpsTracking = () => {
 		setOpenMenu(false);
@@ -35,13 +37,26 @@ const Navbar = () => {
 						</Link>
 					))}
 				</div>
-				<Link
-					to={"/auth"}
-					className="auth-btn"
-					onClick={() => setOpenMenu(false)}
-				>
-					Entrar
-				</Link>
+
+				{authenticated ? (
+					<button
+						className="auth-btn"
+						onClick={() => {
+							setOpenMenu(false);
+							handleLogout();
+						}}
+					>
+						Sair
+					</button>
+				) : (
+					<Link
+						to={"/auth"}
+						className="auth-btn"
+						onClick={() => setOpenMenu(false)}
+					>
+						Entrar
+					</Link>
+				)}
 				<S.GpsTracking active={gpsTracking}>
 					<button className="switcher-btn" onClick={handleGpsTracking} />
 					<span className="switcher-span">{gpsTracking ? "ON" : "OFF"}</span>

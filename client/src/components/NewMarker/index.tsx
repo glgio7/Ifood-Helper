@@ -46,7 +46,7 @@ const NewMarkerComponent = () => {
 		try {
 			const { data } = await axios.post(url, {
 				icon: { iconUrl: newMarker.icon.iconUrl, label: newMarker.icon.label },
-				author: "admin",
+				author: newMarker.author,
 				comment: newMarker.comment,
 				position: { lat: newMarker.position.lat, lng: newMarker.position.lng },
 				createdAt: currentDate,

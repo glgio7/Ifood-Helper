@@ -41,6 +41,7 @@ export const Navbar = styled.nav<{ active: boolean }>`
 		justify-content: center;
 
 		font-weight: bold;
+		font-size: 1rem;
 
 		border-radius: 4px;
 	}

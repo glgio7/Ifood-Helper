@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 export const AddMarkerListener = () => {
 	const { addNewMarkerPosition, setMarkerDetails, setNewMarker } = useMarkers();
 
-	const { authenticated } = useAuth();
+	const { authenticated, user } = useAuth();
 
 	const navigate = useNavigate();
 
@@ -17,7 +17,7 @@ export const AddMarkerListener = () => {
 
 	useMapEvents({
 		click(event) {
-			if (!authenticated) {
+			if (!authenticated || !user) {
 				navigate("/auth");
 				return;
 			}
@@ -38,7 +38,7 @@ export const AddMarkerListener = () => {
 						comment: "",
 						icon: icons[0],
 						position: { lat: lat, lng: lng },
-						author: "admin",
+						author: user.username,
 						createdAt: currentDate,
 					});
 
