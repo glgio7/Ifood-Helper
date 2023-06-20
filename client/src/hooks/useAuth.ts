@@ -27,11 +27,15 @@ export const useAuth = () => {
 					return response.data;
 				});
 
-			const { email, name, username, createdAt, token } = response;
+			const { email, name, username, createdAt, token, score } = response;
 
-			setUser({ email, name, username, createdAt, token });
+			setUser({ email, name, username, createdAt, token, score });
 			setAuthenticated(true);
 			navigate("/");
+
+			if (token) {
+				localStorage.setItem("token", token);
+			}
 		} catch (error) {
 			console.log(error);
 
@@ -41,5 +45,18 @@ export const useAuth = () => {
 		}
 	};
 
-	return { user, setUser, authenticated, setAuthenticated, handleLogin };
+	const handleLogout = () => {
+		setAuthenticated(false);
+		setUser(null);
+		localStorage.removeItem("token");
+	};
+
+	return {
+		user,
+		setUser,
+		authenticated,
+		setAuthenticated,
+		handleLogin,
+		handleLogout,
+	};
 };

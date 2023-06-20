@@ -5,6 +5,7 @@ export interface IUser {
 	username: string;
 	email: string;
 	createdAt: string;
+	score: number;
 	token?: string;
 	profileIcon?: string;
 }
