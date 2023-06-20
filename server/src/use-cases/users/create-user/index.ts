@@ -1,10 +1,11 @@
 import { IUser } from "../../../entities/user/protocols";
 import { User } from "../../../entities/user/user";
+import { IUsersRepository } from "../../../repositories/protocols";
 import { HttpRequest, HttpResponse } from "../../protocols";
-import { ICreateUserController, ICreateUserRepository } from "./protocols";
+import { ICreateUserController } from "./protocols";
 
 export class CreateUserController implements ICreateUserController {
-	constructor(private readonly createUserRepository: ICreateUserRepository) {}
+	constructor(private readonly usersRepository: IUsersRepository) {}
 
 	async handle(
 		httpRequest: HttpRequest<Omit<IUser, "createdAt">>
@@ -21,7 +22,7 @@ export class CreateUserController implements ICreateUserController {
 				name,
 				createdAt: currentDate,
 			});
-			const user = await this.createUserRepository.createUser(newUser);
+			const user = await this.usersRepository.createUser(newUser);
 
 			return {
 				statusCode: 200,
