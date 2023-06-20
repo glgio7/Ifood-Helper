@@ -11,15 +11,15 @@ export class CreateUserController implements ICreateUserController {
 		httpRequest: HttpRequest<Omit<IUser, "createdAt">>
 	): Promise<HttpResponse<IUser>> {
 		try {
-			const currentDate = new Date().toLocaleDateString();
+			const currentDate = new Date().toLocaleDateString("pt-br");
 
-			const { email, password, username, score, name } = httpRequest.body;
+			const { email, password, username, name } = httpRequest.body;
 			const newUser = new User({
 				email,
 				password,
 				username,
-				score,
 				name,
+				score: 1,
 				createdAt: currentDate,
 			});
 			const user = await this.usersRepository.createUser(newUser);
