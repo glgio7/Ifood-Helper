@@ -1,6 +1,7 @@
 export type InputContainerProps = {
-	onChange(e: React.ChangeEvent<HTMLInputElement>): void;
+	value: string;
 	type: string;
 	id: string;
 	placeholder: string;
+	onChange(e: React.ChangeEvent<HTMLInputElement>): void;
 };

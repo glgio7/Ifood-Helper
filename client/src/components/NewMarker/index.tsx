@@ -91,6 +91,7 @@ const NewMarkerComponent = () => {
 				</select>
 
 				<InputContainer
+					value={newMarker!.comment}
 					id="comment"
 					type="text"
 					placeholder="Insira um comentário"

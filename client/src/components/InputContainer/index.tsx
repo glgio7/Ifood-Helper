@@ -3,8 +3,9 @@ import { InputContainerProps } from "./types";
 import { inputIcons } from "../../constants/inputIcons";
 
 const InputContainer = ({
-	id,
+	value,
 	type,
+	id,
 	placeholder,
 	onChange,
 }: InputContainerProps) => {
@@ -15,6 +16,7 @@ const InputContainer = ({
 			{LabelIcon && <LabelIcon className={"icon-label"} />}
 
 			<input
+				value={value || ""}
 				type={type}
 				id={id}
 				placeholder={placeholder}
