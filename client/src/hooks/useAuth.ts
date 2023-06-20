@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
-import { IUser } from "../contexts/AuthContext/types";
+import { INewUser, IUser } from "../contexts/AuthContext/types";
 import axios, { AxiosError } from "axios";
 import { IUserCredentials } from "../pages/Login/types";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +10,30 @@ export const useAuth = () => {
 
 	const { user, setUser, authenticated, setAuthenticated } =
 		useContext(AuthContext);
+
+	const handleRegister = async (
+		e: React.FormEvent<HTMLFormElement>,
+		newUser: INewUser
+	) => {
+		e.preventDefault();
+		try {
+			await axios
+				.post(`${import.meta.env.VITE_APP_API_URL}/auth/signup`, newUser)
+				.then((res) => {
+					return res.data;
+				});
+
+			alert("Obrigado por se registrar! Faça login para começar a usar o app.");
+
+			navigate("/login");
+		} catch (error) {
+			if (error instanceof AxiosError) {
+				alert(error.response?.data);
+			} else {
+				console.log(error);
+			}
+		}
+	};
 
 	const handleLogin = async (
 		e: React.FormEvent<HTMLFormElement>,
@@ -37,10 +61,10 @@ export const useAuth = () => {
 				localStorage.setItem("token", token);
 			}
 		} catch (error) {
-			console.log(error);
-
 			if (error instanceof AxiosError) {
 				alert(error.response?.data);
+			} else {
+				console.log(error);
 			}
 		}
 	};
@@ -58,5 +82,6 @@ export const useAuth = () => {
 		setAuthenticated,
 		handleLogin,
 		handleLogout,
+		handleRegister,
 	};
 };

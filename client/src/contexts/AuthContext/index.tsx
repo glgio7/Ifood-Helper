@@ -1,6 +1,6 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 import { AuthProviderProps, IAuthContext, IUser } from "./types";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 export const AuthContext = createContext({} as IAuthContext);
 
@@ -10,7 +10,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
 	const token = localStorage.getItem("token");
 
-	const handleLoginWithToken = async () => {
+	const handleLoginWithToken = useCallback(async () => {
 		try {
 			const response: IUser = await axios
 				.post(`${import.meta.env.VITE_APP_API_URL}/auth/token`, {
@@ -25,17 +25,21 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 			setAuthenticated(true);
 			setUser({ email, name, username, createdAt, score });
 		} catch (error) {
-			console.log(error);
+			if (error instanceof AxiosError) {
+				alert("Sua sessão expirou.");
+				localStorage.removeItem("token");
+				console.log(error.response?.data);
+			} else {
+				console.log(error);
+			}
 		}
-	};
+	}, []);
 
 	useEffect(() => {
 		if (token) {
 			handleLoginWithToken();
 		}
 	}, []);
-
-	console.log(user);
 
 	const contextValue = {
 		user,

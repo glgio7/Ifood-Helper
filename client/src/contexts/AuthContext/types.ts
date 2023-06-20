@@ -10,6 +10,13 @@ export interface IUser {
 	profileIcon?: string;
 }
 
+export interface INewUser {
+	email: string;
+	password: string;
+	name: string;
+	username: string;
+}
+
 export interface IAuthContext {
 	user: IUser | null;
 	setUser: React.Dispatch<SetStateAction<IUser | null>>;
