@@ -1,0 +1,251 @@
+{
+	"openapi": "3.0.0",
+	"info": {
+		"title": "Documentação - Ifood Helper API",
+		"version": "1.0.0"
+	},
+	"tags": [
+		{
+			"name": "Auth",
+			"description": "Endpoints de autenticação."
+		},
+		{
+			"name": "Markers",
+			"description": "Endpoints de marcadores."
+		}
+	],
+	"paths": {
+		"/auth/signup": {
+			"post": {
+				"tags": ["Auth"],
+				"description": "Registra um novo usuário.",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Register-user"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Dados do usuario cadastrado.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IUser"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auth/signin": {
+			"post": {
+				"tags": ["Auth"],
+				"description": "Autentica o usuário com email e senha.",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Auth-with-email"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Dados do usuario autenticado com email.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IUser"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/auth/token": {
+			"post": {
+				"tags": ["Auth"],
+				"description": "Autentica o usuário com token de persistência.",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Auth-with-token"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Dados do usuario autenticado com token.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IUser"
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"/markers": {
+			"get": {
+				"tags": ["Markers"],
+				"description": "Retorna todos os marcadores do banco de dados.",
+				"responses": {
+					"200": {
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "array",
+									"items": {
+										"$ref": "#/components/schemas/IMarker"
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"post": {
+				"tags": ["Markers"],
+				"description": "Insere um novo marcador no banco de dados.",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/IMarker"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Dados do marcador adicionado.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IMarker"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"schemas": {
+			"Register-user": {
+				"type": "object",
+				"properties": {
+					"name": {
+						"type": "string"
+					},
+					"username": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				}
+			},
+			"Auth-with-email": {
+				"type": "object",
+				"properties": {
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					}
+				}
+			},
+			"Auth-with-token": {
+				"type": "object",
+				"properties": {
+					"token": {
+						"type": "string"
+					}
+				},
+				"required": ["token"]
+			},
+			"IUser": {
+				"type": "object",
+				"properties": {
+					"token": {
+						"type": "string"
+					},
+					"id": {
+						"type": "string"
+					},
+					"createdAt": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"username": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					},
+					"score": {
+						"type": "number"
+					}
+				}
+			},
+			"IMarker": {
+				"type": "object",
+				"properties": {
+					"author": {
+						"type": "string"
+					},
+					"createdAt": {
+						"type": "string"
+					},
+					"icon": {
+						"type": "object",
+						"properties": {
+							"label": {
+								"type": "string"
+							},
+							"iconUrl": {
+								"type": "string"
+							}
+						}
+					},
+					"position": {
+						"type": "object",
+						"properties": {
+							"lat": {
+								"type": "number"
+							},
+							"lng": {
+								"type": "number"
+							}
+						}
+					},
+					"comment": {
+						"type": "string"
+					}
+				}
+			}
+		}
+	}
+}
