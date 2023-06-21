@@ -7,12 +7,13 @@ export const CustomPopup = styled.div<{ active: string }>`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: space-around;
+	justify-content: center;
 
 	opacity: ${({ active }) => (active ? "1" : "0")};
 	pointer-events: ${({ active }) => (active ? "all" : "none")};
 
 	width: 40%;
+	min-height: 50vh;
 
 	padding: 1rem;
 
