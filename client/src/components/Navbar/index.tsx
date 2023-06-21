@@ -26,16 +26,28 @@ const Navbar = () => {
 		<>
 			<S.Navbar active={openMenu}>
 				<div className="links">
-					{navLinks.map((navlink) => (
-						<Link
-							key={navlink.span}
-							to={navlink.href}
-							className="links__a"
-							onClick={() => setOpenMenu(false)}
-						>
-							{navlink.span}
-						</Link>
-					))}
+					{navLinks.map((navlink) =>
+						navlink.external ? (
+							<a
+								key={navlink.span}
+								target="_blank"
+								href={navlink.href}
+								className="links__a"
+								onClick={() => setOpenMenu(false)}
+							>
+								{navlink.span}
+							</a>
+						) : (
+							<Link
+								key={navlink.span}
+								to={navlink.href}
+								className="links__a"
+								onClick={() => setOpenMenu(false)}
+							>
+								{navlink.span}
+							</Link>
+						)
+					)}
 				</div>
 
 				{authenticated ? (
