@@ -36,7 +36,7 @@ const Home = () => {
 							<Marker
 								position={currentLocation.position}
 								icon={createCustomIcon(currentLocation.icon)}
-								key={Math.random() * 999999999999}
+								key={JSON.stringify(currentLocation.position)}
 								marker={currentLocation}
 							></Marker>
 
@@ -49,7 +49,7 @@ const Home = () => {
 									<Marker
 										position={marker.position}
 										icon={customIcon}
-										key={Math.random() * 999999999999}
+										key={JSON.stringify(marker.position)}
 										marker={marker}
 									></Marker>
 								);
