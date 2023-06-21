@@ -17,6 +17,8 @@ export const Register = styled.main`
 	.title-image {
 		width: 240px;
 		aspect-ratio: 1;
+
+		margin-bottom: 2rem;
 	}
 
 	form {
@@ -33,6 +35,7 @@ export const Register = styled.main`
 
 	input {
 		color: #bb2222;
+		caret-color: #dd2222;
 
 		&::placeholder {
 			color: #bb2222;

@@ -54,7 +54,7 @@ const Navbar = () => {
 						className="auth-btn"
 						onClick={() => setOpenMenu(false)}
 					>
-						Entrar
+						Acesso
 					</Link>
 				)}
 				<S.GpsTracking active={gpsTracking}>

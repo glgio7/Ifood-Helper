@@ -101,8 +101,9 @@ export const GpsTracking = styled.div<{ active: boolean }>`
 		order: -1;
 
 		font-weight: normal;
+		font-size: 0.8rem;
 
-		margin-block: 0.5rem;
+		margin-block: 1rem;
 
 		.switcher-btn {
 			display: inline-flex;
@@ -138,6 +139,9 @@ export const GpsTracking = styled.div<{ active: boolean }>`
 
 		.switcher-span {
 			color: #dd2222;
+
+			margin-top: 0.5rem;
+
 			font-weight: bold;
 		}
 	}
