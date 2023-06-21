@@ -5,6 +5,7 @@ import { IMarker } from "../Marker/types";
 import { currentDate } from "../../utils/getCurrentDate";
 import { icons } from "../../constants/markersIcons";
 import InputContainer from "../InputContainer";
+import * as S from "../Popup/styles";
 
 const NewMarkerComponent = () => {
 	const { setNewMarker, setMarkers, newMarker } = useMarkers();
@@ -65,10 +66,10 @@ const NewMarkerComponent = () => {
 
 	return (
 		<>
-			<img className="event-icon" src={newMarker!.icon.iconUrl} />
-			<form onSubmit={(e) => handleAddMarker(e, newMarker!)}>
-				<h6 className="new-alert">Adicionar novo alerta</h6>
-				<label htmlFor="alert">Tipo</label>
+			<S.AlertIcon src={newMarker!.icon.iconUrl} />
+			<S.Form onSubmit={(e) => handleAddMarker(e, newMarker!)}>
+				<S.Text>Adicionar novo alerta</S.Text>
+				<S.Subtitle>Tipo</S.Subtitle>
 				<select
 					name=""
 					id="alert"
@@ -100,10 +101,10 @@ const NewMarkerComponent = () => {
 					}}
 				/>
 
-				<button type="submit" className="submit-btn">
+				<S.Button type="submit" className="submit-btn">
 					Confirmar
-				</button>
-			</form>
+				</S.Button>
+			</S.Form>
 		</>
 	);
 };

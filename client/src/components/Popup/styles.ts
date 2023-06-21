@@ -7,7 +7,7 @@ export const CustomPopup = styled.div<{ active: string }>`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-around;
 
 	opacity: ${({ active }) => (active ? "1" : "0")};
 	pointer-events: ${({ active }) => (active ? "all" : "none")};
@@ -35,53 +35,27 @@ export const CustomPopup = styled.div<{ active: string }>`
 		font-weight: bold;
 	}
 
-	.event-icon {
-		width: 128px;
-		aspect-ratio: 1;
-	}
+	@media screen and (max-width: 768px) {
+		z-index: 99;
 
-	span,
-	label,
-	input,
-	select {
-		color: #fff;
-	}
-
-	form {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
 		width: 100%;
+		height: 100%;
+
+		border-radius: 0;
+
+		select,
+		.submit-btn {
+			width: 90%;
+		}
 	}
+`;
 
-	span {
-		text-align: center;
-	}
+export const Form = styled.form`
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
 
-	label,
-	span,
-	.submit-btn,
-	.new-alert {
-		margin-block: 1rem;
-	}
-
-	.submit-btn,
-	.new-alert {
-		color: #bb2222;
-		background-color: #eee;
-
-		border-radius: 4px;
-
-		min-height: 40px;
-		width: 60%;
-
-		font-size: 1rem;
-		font-weight: bold;
-
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-	}
 	select {
 		background-color: #333;
 
@@ -104,17 +78,134 @@ export const CustomPopup = styled.div<{ active: string }>`
 	}
 
 	@media screen and (max-width: 768px) {
-		z-index: 99;
-
-		width: 100%;
-		height: 100%;
-
-		border-radius: 0;
-
-		select,
-		.new-alert,
-		.submit-btn {
+		select {
 			width: 90%;
 		}
+	}
+`;
+
+export const Box = styled.div`
+	min-height: 40px;
+	width: 60%;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+
+	margin-block: 0.5rem;
+	text-align: center;
+
+	button {
+		background-color: transparent;
+	}
+
+	.icon {
+		color: #fff;
+
+		width: 36px;
+		height: 36px;
+
+		padding: 0.5rem;
+
+		border-radius: 4px;
+		border: 1px solid rgba(255, 255, 255, 0.5);
+	}
+
+	span {
+		display: block;
+		color: #fff;
+
+		font-size: 0.75rem;
+		font-weight: bold;
+		margin-block: 3px;
+	}
+
+	@media screen and (max-width: 768px) {
+		width: 90%;
+	}
+`;
+
+export const Text = styled.h5`
+	background-color: #eee;
+
+	border-radius: 4px;
+
+	min-height: 40px;
+	width: 60%;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	font-weight: bold;
+	font-size: 1rem;
+
+	margin-block: 0.5rem;
+
+	color: #bb2222;
+
+	@media screen and (max-width: 768px) {
+		width: 90%;
+	}
+`;
+
+export const Subtitle = styled.h6`
+	color: #fff;
+	text-align: center;
+	font-size: 0.85rem;
+
+	margin-block: 0.5rem;
+
+	@media screen and (max-width: 768px) {
+		width: 90%;
+	}
+`;
+
+export const Comment = styled.div`
+	flex-direction: column;
+	display: flex;
+	align-items: center;
+
+	padding: 0.5rem;
+
+	border: 1px solid rgba(255, 255, 255, 0.5);
+	border-radius: 4px;
+
+	width: 60%;
+
+	span {
+		margin-block: 0.5rem;
+		color: #fff;
+	}
+
+	@media screen and (max-width: 768px) {
+		width: 90%;
+	}
+`;
+
+export const AlertIcon = styled.img`
+	width: 128px;
+	aspect-ratio: 1;
+`;
+
+export const Button = styled.button`
+	color: #bb2222;
+	background-color: #eee;
+
+	border-radius: 4px;
+
+	min-height: 40px;
+	width: 60%;
+
+	font-size: 1rem;
+	font-weight: bold;
+
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+
+	@media screen and (max-width: 768px) {
+		width: 90%;
 	}
 `;

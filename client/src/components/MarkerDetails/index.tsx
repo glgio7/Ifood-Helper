@@ -1,28 +1,39 @@
+import { RiDislikeFill, RiHeartFill } from "react-icons/ri";
 import { useMarkers } from "../../hooks/useMarkers";
+import * as S from "../Popup/styles";
 
 export const MarkerDetailsComponent = () => {
 	const { markerDetails } = useMarkers();
+	if (markerDetails) {
+		return (
+			<>
+				<S.AlertIcon src={markerDetails.icon.iconUrl} />
 
-	return (
-		<>
-			<img className="event-icon" src={markerDetails!.icon.iconUrl} />
-			<h6 className="new-alert">{markerDetails!.icon.label}</h6>
-			{markerDetails!.icon.iconUrl !== "/icons/current-icon.svg" && (
-				<>
-					<span>Comentário:</span>
-				</>
-			)}
-			<span>{markerDetails!.comment}</span>
-			{markerDetails!.icon.iconUrl !== "/icons/current-icon.svg" && (
-				<>
-					<h6 className="new-alert">
-						Enviado por: {`@${markerDetails!.author}`}
-					</h6>
-					<span>{`em ${
-						markerDetails!.createdAt || "horário indefindo."
-					} `}</span>
-				</>
-			)}
-		</>
-	);
+				<S.Text>{markerDetails.icon.label}</S.Text>
+
+				{markerDetails!.icon.label !== "Localização atual." && (
+					<>
+						<S.Comment>
+							<S.Subtitle>Comentário</S.Subtitle>
+							<span>{markerDetails.comment}</span>
+						</S.Comment>
+						<S.Text>Enviado por {`@${markerDetails!.author}`}</S.Text>
+						<S.Subtitle>
+							{`em ${markerDetails!.createdAt || "horário indefindo."} `}
+						</S.Subtitle>
+						<S.Box>
+							<button>
+								<RiHeartFill className={"icon"} />
+								<span>Eu gostei</span>
+							</button>
+							<button>
+								<RiDislikeFill className={"icon"} />
+								<span>Não foi útil</span>
+							</button>
+						</S.Box>
+					</>
+				)}
+			</>
+		);
+	}
 };
