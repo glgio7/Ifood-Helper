@@ -35,6 +35,15 @@ export class Marker implements IMarker {
 	get icon() {
 		return this.props.icon;
 	}
+	get votes() {
+		return this.props.votes;
+	}
+	get upvoters() {
+		return this.props.upvoters;
+	}
+	get downvoters() {
+		return this.props.downvoters;
+	}
 	get position() {
 		return this.props.position;
 	}

@@ -14,4 +14,7 @@ export interface IMarker {
 	icon: IMarkerIcon;
 	position: IMarkerPosition;
 	comment: string;
+	votes: number;
+	upvoters: string[];
+	downvoters: string[];
 }

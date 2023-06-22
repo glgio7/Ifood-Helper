@@ -8,6 +8,9 @@ test("create a marker", () => {
 		comment: "event-comment",
 		position: { lat: 12345, lng: 54321 },
 		createdAt: "14/06, 17:00",
+		votes: 0,
+		upvoters: [],
+		downvoters: [],
 	});
 
 	expect(marker).toBeInstanceOf(Marker);
