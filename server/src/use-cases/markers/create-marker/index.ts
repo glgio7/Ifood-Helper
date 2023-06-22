@@ -19,6 +19,9 @@ export class CreateMarkerController implements ICreateMarkerController {
 				icon,
 				position,
 				createdAt,
+				votes: 0,
+				upvoters: [],
+				downvoters: [],
 			});
 
 			const marker = await this.markerRepositoy.createMarker(newMarker);
@@ -30,7 +33,7 @@ export class CreateMarkerController implements ICreateMarkerController {
 		} catch (error) {
 			if (error instanceof Error) {
 				return {
-					statusCode: 500,
+					statusCode: 400,
 					body: error.message,
 				};
 			}
