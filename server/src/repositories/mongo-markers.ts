@@ -1,19 +1,70 @@
+import { ObjectId } from "mongodb";
 import { MongoClientMarkers } from "../database/mongo";
 import { IMarker } from "../entities/marker/protocols";
-import { IMarkersRepository } from "./protocols";
+import { IMarkersRepository, IUpdateOptions } from "./protocols";
+import { IMarkerVotesParams } from "../use-cases/markers/update-marker/protocols";
 
 export class MarkersRepository implements IMarkersRepository {
-	async getMarkers(): Promise<IMarker[]> {
-		const markers = await MongoClientMarkers.db
-			.collection<Omit<IMarker, "">>("markers")
-			.find({})
-			.toArray();
+	async deleteMarker(position: { lat: number; lng: number }): Promise<void> {
+		await MongoClientMarkers.db
+			.collection<IMarker>("markers")
+			.deleteOne({ position: position });
+	}
 
-		return markers.map(({ _id, ...marker }) => ({ ...marker }));
+	async updateMarkerVotes(params: IMarkerVotesParams): Promise<IMarker> {
+		const { position, action, author } = params;
+
+		const updateOptions: IUpdateOptions = {
+			$inc: {},
+		};
+
+		const marker: IMarker | null = await MongoClientMarkers.db
+			.collection<IMarker>("markers")
+			.findOne({ position });
+
+		const isUpvoter = marker?.upvoters.includes(author) ? -1 : 1;
+		const isDownvoter = marker?.downvoters.includes(author) ? 1 : -1;
+
+		if (action === "increase") {
+			if (isUpvoter) {
+				updateOptions.$inc.votes = -1;
+				updateOptions.$pull = { upVoters: author };
+			} else {
+				updateOptions.$inc.votes = 1;
+				updateOptions.$addToSet = { upVoters: author };
+			}
+		} else if (action === "decrease") {
+			if (isDownvoter) {
+				updateOptions.$inc.votes = 1;
+				updateOptions.$pull = { downVoters: author };
+			} else {
+				updateOptions.$inc.votes = -1;
+				updateOptions.$addToSet = { downVoters: author };
+			}
+		}
+
+		const updatedMarker = await MongoClientMarkers.db
+			.collection<IMarker>("markers")
+			.findOneAndUpdate({ position: position }, updateOptions);
+
+		if (!updatedMarker.value) {
+			throw new Error("Erro ao receber o feedback");
+		}
+
+		return updatedMarker.value;
 	}
 
 	async createMarker(params: IMarker): Promise<IMarker> {
-		const { position, author, comment, icon, createdAt } = params;
+		const {
+			position,
+			author,
+			comment,
+			icon,
+			createdAt,
+			votes,
+			upvoters,
+			downvoters,
+		} = params;
 
 		const markerAlreadyExists = await MongoClientMarkers.db
 			.collection("markers")
@@ -24,8 +75,17 @@ export class MarkersRepository implements IMarkersRepository {
 		}
 
 		const { insertedId } = await MongoClientMarkers.db
-			.collection("markers")
-			.insertOne({ position, author, comment, icon, createdAt });
+			.collection<IMarker>("markers")
+			.insertOne({
+				position,
+				author,
+				comment,
+				icon,
+				createdAt,
+				votes,
+				downvoters,
+				upvoters,
+			});
 
 		const createdMarker = await MongoClientMarkers.db
 			.collection<Omit<IMarker, "id">>("markers")
@@ -36,5 +96,22 @@ export class MarkersRepository implements IMarkersRepository {
 		}
 
 		return createdMarker;
+	}
+
+	async getMarkers(): Promise<IMarker[]> {
+		const markers = await MongoClientMarkers.db
+			.collection<IMarker>("markers")
+			.find({})
+			.toArray();
+
+		for (const marker of markers) {
+			if (marker.votes <= -3) {
+				await this.deleteMarker(marker.position);
+			}
+		}
+
+		const availableMarkers = markers.filter((marker) => marker.votes > -3);
+
+		return availableMarkers.map(({ _id, ...marker }) => ({ ...marker }));
 	}
 }
