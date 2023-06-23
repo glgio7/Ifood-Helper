@@ -59,6 +59,7 @@ export const Form = styled.form`
 
 	select {
 		background-color: #333;
+		color: #fff;
 
 		min-height: 40px;
 		width: 60%;
@@ -74,7 +75,6 @@ export const Form = styled.form`
 
 		&:focus {
 			outline: #ff0000 1px solid;
-			caret-color: #ff0000;
 		}
 	}
 
@@ -91,9 +91,10 @@ export const Box = styled.div`
 
 	display: flex;
 	align-items: center;
-	justify-content: space-evenly;
+	justify-content: space-between;
 
 	margin-block: 0.5rem;
+
 	text-align: center;
 
 	button {
@@ -110,6 +111,19 @@ export const Box = styled.div`
 
 		border-radius: 4px;
 		border: 1px solid rgba(255, 255, 255, 0.5);
+
+		transition: all 300ms;
+	}
+
+	.icon.active {
+		background-color: #fff;
+		color: #bb2222;
+
+		border: 1px solid rgba(0, 0, 0, 0.5);
+
+		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+
+		transition: all 300ms;
 	}
 
 	span {
