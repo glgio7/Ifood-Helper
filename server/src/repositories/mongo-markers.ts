@@ -1,8 +1,8 @@
-import { ObjectId } from "mongodb";
 import { MongoClientMarkers } from "../database/mongo";
 import { IMarker } from "../entities/marker/protocols";
 import { IMarkersRepository, IUpdateOptions } from "./protocols";
 import { IMarkerVotesParams } from "../use-cases/markers/update-marker/protocols";
+import { after } from "node:test";
 
 export class MarkersRepository implements IMarkersRepository {
 	async deleteMarker(position: { lat: number; lng: number }): Promise<void> {
@@ -46,7 +46,9 @@ export class MarkersRepository implements IMarkersRepository {
 
 		const updatedMarker = await MongoClientMarkers.db
 			.collection<IMarker>("markers")
-			.findOneAndUpdate({ position: position }, updateOptions);
+			.findOneAndUpdate({ position: position }, updateOptions, {
+				returnDocument: "after",
+			});
 
 		if (!updatedMarker.value) {
 			throw new Error("Erro ao receber o feedback");
