@@ -2,7 +2,6 @@ import { MongoClientMarkers } from "../database/mongo";
 import { IMarker } from "../entities/marker/protocols";
 import { IMarkersRepository, IUpdateOptions } from "./protocols";
 import { IMarkerVotesParams } from "../use-cases/markers/update-marker/protocols";
-import { after } from "node:test";
 
 export class MarkersRepository implements IMarkersRepository {
 	async deleteMarker(position: { lat: number; lng: number }): Promise<void> {
@@ -25,23 +24,22 @@ export class MarkersRepository implements IMarkersRepository {
 		const isUpvoter = marker?.upvoters.includes(author);
 		const isDownvoter = marker?.downvoters.includes(author);
 
-		if (action === "increase") {
-			if (isUpvoter) {
-				updateOptions.$inc.votes = -1;
-				updateOptions.$pull = { upvoters: author };
-			} else if (!isUpvoter) {
-				updateOptions.$inc.votes = 1;
-				updateOptions.$addToSet = { upvoters: author };
-			}
-		}
-		if (action === "decrease") {
-			if (isDownvoter) {
-				updateOptions.$inc.votes = 1;
-				updateOptions.$pull = { downvoters: author };
-			} else if (!isDownvoter) {
-				updateOptions.$inc.votes = -1;
-				updateOptions.$addToSet = { downvoters: author };
-			}
+		switch (action) {
+			case "increase":
+				updateOptions.$inc.votes = isUpvoter ? 1 : -1;
+				updateOptions.$pull = isUpvoter ? { upvoters: author } : undefined;
+				updateOptions.$addToSet = isUpvoter ? undefined : { upvoters: author };
+				break;
+			case "decrease":
+				updateOptions.$inc.votes = isDownvoter ? 1 : -1;
+				updateOptions.$pull = isDownvoter ? { downvoters: author } : undefined;
+				updateOptions.$addToSet = isDownvoter
+					? undefined
+					: { downvoters: author };
+				break;
+			default:
+				null;
+				break;
 		}
 
 		const updatedMarker = await MongoClientMarkers.db
