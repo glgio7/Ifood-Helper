@@ -21,6 +21,6 @@ export interface IUsersRepository {
 
 export interface IUpdateOptions {
 	$inc: { votes?: number };
-	$addToSet?: { upVoters?: string; downVoters?: string };
-	$pull?: { upVoters?: string; downVoters?: string };
+	$addToSet?: { upvoters?: string; downvoters?: string };
+	$pull?: { upvoters?: string; downvoters?: string };
 }

@@ -22,24 +22,25 @@ export class MarkersRepository implements IMarkersRepository {
 			.collection<IMarker>("markers")
 			.findOne({ position });
 
-		const isUpvoter = marker?.upvoters.includes(author) ? -1 : 1;
-		const isDownvoter = marker?.downvoters.includes(author) ? 1 : -1;
+		const isUpvoter = marker?.upvoters.includes(author);
+		const isDownvoter = marker?.downvoters.includes(author);
 
 		if (action === "increase") {
 			if (isUpvoter) {
 				updateOptions.$inc.votes = -1;
-				updateOptions.$pull = { upVoters: author };
-			} else {
+				updateOptions.$pull = { upvoters: author };
+			} else if (!isUpvoter) {
 				updateOptions.$inc.votes = 1;
-				updateOptions.$addToSet = { upVoters: author };
+				updateOptions.$addToSet = { upvoters: author };
 			}
-		} else if (action === "decrease") {
+		}
+		if (action === "decrease") {
 			if (isDownvoter) {
 				updateOptions.$inc.votes = 1;
-				updateOptions.$pull = { downVoters: author };
-			} else {
+				updateOptions.$pull = { downvoters: author };
+			} else if (!isDownvoter) {
 				updateOptions.$inc.votes = -1;
-				updateOptions.$addToSet = { downVoters: author };
+				updateOptions.$addToSet = { downvoters: author };
 			}
 		}
 
