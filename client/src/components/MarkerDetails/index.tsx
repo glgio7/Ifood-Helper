@@ -1,9 +1,12 @@
 import { RiDislikeFill, RiHeartFill } from "react-icons/ri";
 import { useMarkers } from "../../hooks/useMarkers";
 import * as S from "../Popup/styles";
+import { useAuth } from "../../hooks/useAuth";
 
 export const MarkerDetailsComponent = () => {
-	const { markerDetails } = useMarkers();
+	const { markerDetails, rateMarker } = useMarkers();
+	const { user } = useAuth();
+
 	if (markerDetails) {
 		return (
 			<>
@@ -11,7 +14,7 @@ export const MarkerDetailsComponent = () => {
 
 				<S.Text>{markerDetails.icon.label}</S.Text>
 
-				{markerDetails!.icon.label !== "Localização atual." && (
+				{markerDetails.icon.label !== "Localização atual." && (
 					<>
 						<S.Comment>
 							<S.Subtitle>Comentário</S.Subtitle>
@@ -19,18 +22,48 @@ export const MarkerDetailsComponent = () => {
 						</S.Comment>
 						<S.Text>Enviado por {`@${markerDetails!.author}`}</S.Text>
 						<S.Subtitle>
-							{`em ${markerDetails!.createdAt || "horário indefindo."} `}
+							{`em ${markerDetails.createdAt || "horário indefindo."} `}
 						</S.Subtitle>
-						<S.Box>
-							<button>
-								<RiHeartFill className={"icon"} />
-								<span>Eu gostei</span>
-							</button>
-							<button>
-								<RiDislikeFill className={"icon"} />
-								<span>Não foi útil</span>
-							</button>
-						</S.Box>
+						{user && (
+							<S.Box>
+								<button
+									onClick={() =>
+										rateMarker({
+											position: markerDetails.position,
+											action: "increase",
+											author: user.username,
+										})
+									}
+								>
+									<RiHeartFill
+										className={
+											markerDetails.upvoters.includes(user!.username)
+												? "icon active"
+												: "icon"
+										}
+									/>
+									<span>Eu gostei</span>
+								</button>
+								<button
+									onClick={() =>
+										rateMarker({
+											position: markerDetails.position,
+											action: "decrease",
+											author: user.username,
+										})
+									}
+								>
+									<RiDislikeFill
+										className={
+											markerDetails.downvoters.includes(user!.username)
+												? "icon active"
+												: "icon"
+										}
+									/>
+									<span>Não foi útil</span>
+								</button>
+							</S.Box>
+						)}
 					</>
 				)}
 			</>

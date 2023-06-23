@@ -1,6 +1,11 @@
 import { createContext, useCallback, useEffect, useState } from "react";
-import { IMarker } from "../../components/Marker/types";
-import { Coords, IMarkersContext, MarkersProvidersProps } from "./types";
+import { IMarker, IMinimalMarker } from "../../components/Marker/types";
+import {
+	Coords,
+	IMarkersContext,
+	MarkersProvidersProps,
+	RateMarkerProps,
+} from "./types";
 import axios from "axios";
 import { currentDate } from "../../utils/getCurrentDate";
 
@@ -9,16 +14,18 @@ export const MarkersContext = createContext<IMarkersContext>(
 );
 
 const MarkersProvider = ({ children }: MarkersProvidersProps) => {
-	/////// State form Markers from database
+	/////// State for Markers from database
 	const [markers, setMarkers] = useState<IMarker[]>([]);
 
 	/////// State to tracking and update location in every 3 seconds
 	const [gpsTracking, setGpsTracking] = useState<boolean>(false);
 
 	////// Single markers states
-	const [currentLocation, setCurrentLocation] = useState<IMarker | null>(null);
+	const [currentLocation, setCurrentLocation] = useState<IMinimalMarker | null>(
+		null
+	);
 	const [markerDetails, setMarkerDetails] = useState<IMarker | null>(null);
-	const [newMarker, setNewMarker] = useState<IMarker | null>(null);
+	const [newMarker, setNewMarker] = useState<IMinimalMarker | null>(null);
 
 	/////// Functions
 	const updateCurrentLocation = useCallback(() => {
@@ -26,7 +33,7 @@ const MarkersProvider = ({ children }: MarkersProvidersProps) => {
 			const lat = position.coords.latitude;
 			const lng = position.coords.longitude;
 
-			const current: IMarker = {
+			const current: IMinimalMarker = {
 				icon: {
 					iconUrl: "/icons/current-icon.svg",
 					label: "Localização atual.",
@@ -60,6 +67,27 @@ const MarkersProvider = ({ children }: MarkersProvidersProps) => {
 			}
 	}, []);
 
+	const rateMarker = useCallback(
+		async ({ position, action, author }: RateMarkerProps) => {
+			const url = `${import.meta.env.VITE_APP_API_URL}/markers`;
+			try {
+				const response: IMarker = await axios
+					.patch(url, { position, action, author })
+					.then((res) => {
+						return res.data;
+					});
+
+					setMarkerDetails(response)
+			} catch (error) {
+				if (error instanceof Error) {
+					alert(error.message);
+				}
+				console.log(error);
+			}
+		},
+		[]
+	);
+
 	/////// useEffects
 	useEffect(() => {
 		const url = `${import.meta.env.VITE_APP_API_URL}/markers`;
@@ -92,6 +120,7 @@ const MarkersProvider = ({ children }: MarkersProvidersProps) => {
 		addNewMarkerPosition,
 		gpsTracking,
 		setGpsTracking,
+		rateMarker,
 	};
 
 	return (

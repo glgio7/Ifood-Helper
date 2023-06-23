@@ -13,6 +13,7 @@ export const useMarkers = () => {
 		setNewMarker,
 		gpsTracking,
 		setGpsTracking,
+		rateMarker,
 	} = useContext(MarkersContext);
 
 	return {
@@ -26,5 +27,6 @@ export const useMarkers = () => {
 		setNewMarker,
 		gpsTracking,
 		setGpsTracking,
+		rateMarker,
 	};
 };
