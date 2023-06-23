@@ -37,7 +37,7 @@ const Home = () => {
 								position={currentLocation.position}
 								icon={createCustomIcon(currentLocation.icon)}
 								key={JSON.stringify(currentLocation.position)}
-								marker={currentLocation}
+								marker={currentLocation as IMarker}
 							></Marker>
 
 							{/* // Mapping markers from DB */}

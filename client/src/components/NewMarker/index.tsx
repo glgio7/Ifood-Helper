@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useInterface } from "../../hooks/useInterface";
 import { useMarkers } from "../../hooks/useMarkers";
-import { IMarker } from "../Marker/types";
+import { IMinimalMarker } from "../Marker/types";
 import { currentDate } from "../../utils/getCurrentDate";
 import { icons } from "../../constants/markersIcons";
 import InputContainer from "../InputContainer";
@@ -34,7 +34,7 @@ const NewMarkerComponent = () => {
 
 	const handleAddMarker = async (
 		e: React.FormEvent<HTMLFormElement>,
-		newMarker: IMarker
+		newMarker: IMinimalMarker
 	) => {
 		e.preventDefault();
 
