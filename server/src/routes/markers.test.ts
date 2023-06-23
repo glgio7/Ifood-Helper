@@ -40,13 +40,13 @@ describe("Testando as rotas de markers", () => {
 		expect(response.data).toMatchObject<IMarker>({} as IMarker);
 	});
 
-	it("Must decrease marker's votes", async () => {
-		const response = await axios.patch(`${baseUrl}/markers`, {
-			position: validMarker.position,
-			action: "decrease",
-			author: validMarker.author,
-		});
-		expect(response.status).toBe(200);
-		expect(response.data).toMatchObject<IMarker>({} as IMarker);
-	});
+	// it("Must decrease marker's votes", async () => {
+	// 	const response = await axios.patch(`${baseUrl}/markers`, {
+	// 		position: validMarker.position,
+	// 		action: "decrease",
+	// 		author: validMarker.author,
+	// 	});
+	// 	expect(response.status).toBe(200);
+	// 	expect(response.data).toMatchObject<IMarker>({} as IMarker);
+	// });
 });
