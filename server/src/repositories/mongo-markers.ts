@@ -26,14 +26,16 @@ export class MarkersRepository implements IMarkersRepository {
 
 		switch (action) {
 			case "increase":
+				updateOptions.$addToSet = isUpvoter ? {} : { upvoters: author };
+				updateOptions.$pull = isDownvoter ? { downvoters: author } : {};
 				updateOptions.$inc.votes = isUpvoter ? -1 : 1;
 				updateOptions.$pull = isUpvoter ? { upvoters: author } : {};
-				updateOptions.$addToSet = isUpvoter ? {} : { upvoters: author };
 				break;
 			case "decrease":
+				updateOptions.$addToSet = isDownvoter ? {} : { downvoters: author };
+				updateOptions.$pull = isUpvoter ? { upvoters: author } : {};
 				updateOptions.$inc.votes = isDownvoter ? 1 : -1;
 				updateOptions.$pull = isDownvoter ? { downvoters: author } : {};
-				updateOptions.$addToSet = isDownvoter ? {} : { downvoters: author };
 				break;
 			default:
 				break;
