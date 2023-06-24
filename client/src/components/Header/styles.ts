@@ -15,7 +15,7 @@ export const Header = styled.header`
 	z-index: 99;
 
 	h1 {
-		min-width: 35%;
+		min-width: 30%;
 		font-family: "Montserrat Alternates", sans-serif;
 
 		cursor: pointer;
@@ -25,6 +25,7 @@ export const Header = styled.header`
 
 		font-size: 2rem;
 		font-weight: bold;
+		margin-right:  1.5rem;
 
 		color: #dd2222;
 	}

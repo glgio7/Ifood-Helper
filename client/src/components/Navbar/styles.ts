@@ -14,11 +14,11 @@ export const Navbar = styled.nav<{ active: boolean }>`
 	.links {
 		display: inline-flex;
 		justify-content: center;
-		min-width: 45%;
+		min-width: 55%;
 	}
 
 	.links__a {
-		margin-inline: 1.5rem;
+		margin-inline: 1rem;
 
 		font-weight: 500;
 

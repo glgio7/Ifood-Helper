@@ -109,7 +109,7 @@ export const Box = styled.div`
 
 		padding: 0.5rem;
 
-		border-radius: 4px;
+		border-radius: 50%;
 		border: 1px solid rgba(255, 255, 255, 0.5);
 
 		transition: all 300ms;
@@ -121,7 +121,7 @@ export const Box = styled.div`
 
 		border: 1px solid rgba(0, 0, 0, 0.5);
 
-		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+		box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.5);
 
 		transition: all 300ms;
 	}
