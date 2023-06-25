@@ -5,8 +5,8 @@ export const navLinks = [
 		external: false,
 	},
 	{
-		span: "Score",
-		href: "/",
+		span: "Perfil",
+		href: "/perfil",
 		external: false,
 	},
 	{
