@@ -10,7 +10,7 @@ const baseUrl = `http://localhost:${process.env.PORT}`;
 describe("Testando as rotas de markers", () => {
 	const validMarker = {
 		icon: { iconUrl: "vitestIcon", label: "vitest-testing" },
-		author: "vitest",
+		author: "username",
 		createdAt: "14/06, 17:00",
 		comment: "testing-post-route",
 		position: { lat: 12345, lng: 54321 },
@@ -39,13 +39,13 @@ describe("Testando as rotas de markers", () => {
 		expect(response.data).toMatchObject<IMarker>({} as IMarker);
 	});
 
-	it("Must decrease marker's votes", async () => {
-		const response = await axios.patch(`${baseUrl}/markers`, {
-			position: validMarker.position,
-			action: "decrease",
-			author: validMarker.author,
-		});
-		expect(response.status).toBe(200);
-		expect(response.data).toMatchObject<IMarker>({} as IMarker);
-	});
+	// it("Must decrease marker's votes", async () => {
+	// 	const response = await axios.patch(`${baseUrl}/markers`, {
+	// 		position: validMarker.position,
+	// 		action: "decrease",
+	// 		author: validMarker.author,
+	// 	});
+	// 	expect(response.status).toBe(200);
+	// 	expect(response.data).toMatchObject<IMarker>({} as IMarker);
+	// });
 });

@@ -3,6 +3,7 @@ import { IMarker } from "../entities/marker/protocols";
 import { IMarkersRepository, IUpdateMarkerVotes } from "./protocols";
 import { IMarkerVotesParams } from "../use-cases/markers/update-marker/protocols";
 import { UsersRepository } from "./mongo-users";
+import { UpdateUserController } from "../use-cases/users/update-user";
 
 export class MarkersRepository implements IMarkersRepository {
 	async deleteMarker(position: { lat: number; lng: number }): Promise<void> {
@@ -13,6 +14,9 @@ export class MarkersRepository implements IMarkersRepository {
 
 	async updateMarkerVotes(params: IMarkerVotesParams): Promise<IMarker> {
 		const { position, action, author } = params;
+
+		const updateUserRepository = new UsersRepository();
+		const updateUserController = new UpdateUserController(updateUserRepository);
 
 		const updateOptions: IUpdateMarkerVotes = {
 			$inc: {},
@@ -25,6 +29,10 @@ export class MarkersRepository implements IMarkersRepository {
 		const isUpvoter = marker?.upvoters.includes(author);
 		const isDownvoter = marker?.downvoters.includes(author);
 
+		if (!marker) {
+			throw new Error("Erro ao encontrar o marcador de alerta.");
+		}
+
 		switch (action) {
 			case "increase":
 				updateOptions.$addToSet = isUpvoter ? {} : { upvoters: author };
@@ -34,8 +42,13 @@ export class MarkersRepository implements IMarkersRepository {
 					? { upvoters: author }
 					: {};
 				updateOptions.$inc.votes = isUpvoter ? -1 : isDownvoter ? 2 : 1;
-				
-				// updateOptions.$pull = isUpvoter ? { upvoters: author } : {};
+
+				updateUserController.updateScore({
+					body: {
+						action: isUpvoter ? "decrease" : "increase",
+						owner: marker.author,
+					},
+				});
 				break;
 			case "decrease":
 				updateOptions.$addToSet = isDownvoter ? {} : { downvoters: author };
@@ -45,7 +58,13 @@ export class MarkersRepository implements IMarkersRepository {
 					? { downvoters: author }
 					: {};
 				updateOptions.$inc.votes = isDownvoter ? 1 : isUpvoter ? -2 : -1;
-				// updateOptions.$pull = isDownvoter ? { downvoters: author } : {};
+
+				updateUserController.updateScore({
+					body: {
+						action: isDownvoter ? "increase" : "decrease",
+						owner: marker.author,
+					},
+				});
 				break;
 			default:
 				break;

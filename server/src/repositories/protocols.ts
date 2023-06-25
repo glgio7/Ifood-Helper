@@ -5,7 +5,7 @@ import {
 	IAuthWithEmail,
 	IAuthWithToken,
 } from "../use-cases/users/auth-user/protocols";
-
+import { IUpdateScore } from "../use-cases/users/update-user/protocols";
 
 export interface IUpdateMarkerVotes {
 	$inc: { votes?: number };
@@ -20,14 +20,9 @@ export interface IMarkersRepository {
 	getMarkers(): Promise<IMarker[]>;
 }
 
-export interface IUpdateScore {
-	action: string;
-	owner: string;
-}
-
 export interface IUsersRepository {
 	createUser(params: IUser): Promise<IUser>;
 	authWithEmail(params: IAuthWithEmail): Promise<Omit<IUser, "password">>;
 	authWithToken(params: IAuthWithToken): Promise<Omit<IUser, "password">>;
-	updateScore(params: IUpdateScore): Promise<Omit<IUser, "password">>;
+	updateScore(params: IUpdateScore): Promise<IUser>;
 }
