@@ -1,7 +1,8 @@
 import { MongoClientMarkers } from "../database/mongo";
 import { IMarker } from "../entities/marker/protocols";
-import { IMarkersRepository, IUpdateOptions } from "./protocols";
+import { IMarkersRepository, IUpdateMarkerVotes } from "./protocols";
 import { IMarkerVotesParams } from "../use-cases/markers/update-marker/protocols";
+import { UsersRepository } from "./mongo-users";
 
 export class MarkersRepository implements IMarkersRepository {
 	async deleteMarker(position: { lat: number; lng: number }): Promise<void> {
@@ -13,7 +14,7 @@ export class MarkersRepository implements IMarkersRepository {
 	async updateMarkerVotes(params: IMarkerVotesParams): Promise<IMarker> {
 		const { position, action, author } = params;
 
-		const updateOptions: IUpdateOptions = {
+		const updateOptions: IUpdateMarkerVotes = {
 			$inc: {},
 		};
 
@@ -33,6 +34,7 @@ export class MarkersRepository implements IMarkersRepository {
 					? { upvoters: author }
 					: {};
 				updateOptions.$inc.votes = isUpvoter ? -1 : isDownvoter ? 2 : 1;
+				
 				// updateOptions.$pull = isUpvoter ? { upvoters: author } : {};
 				break;
 			case "decrease":

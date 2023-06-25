@@ -5,11 +5,29 @@ import {
 	IAuthWithEmail,
 	IAuthWithToken,
 } from "../use-cases/users/auth-user/protocols";
-import { IUsersRepository } from "./protocols";
+import { IUpdateScore, IUsersRepository } from "./protocols";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 export class UsersRepository implements IUsersRepository {
+	async updateScore(params: IUpdateScore): Promise<Omit<IUser, "password">> {
+		const { owner, action } = params;
+
+		const user = await MongoClientUsers.db
+			.collection<IUser>("users")
+			.findOneAndUpdate(
+				{ author: owner },
+				{ $inc: { score: action === "increase" ? 1 : -1 } },
+				{ returnDocument: "after" }
+			);
+
+		if (!user.value) {
+			throw new Error("O Score do autor nao foi atualizado");
+		}
+
+		return user.value;
+	}
+
 	async authWithEmail(
 		params: IAuthWithEmail
 	): Promise<Omit<IUser, "password">> {
@@ -33,6 +51,7 @@ export class UsersRepository implements IUsersRepository {
 
 		return user;
 	}
+
 	async authWithToken(
 		params: IAuthWithToken
 	): Promise<Omit<IUser, "password">> {
