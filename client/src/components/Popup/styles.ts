@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const CustomPopup = styled.div<{ active: string }>`
 	position: absolute;
-	z-index: 10;
+	z-index: 99;
 
 	display: flex;
 	flex-direction: column;
@@ -14,6 +14,8 @@ export const CustomPopup = styled.div<{ active: string }>`
 
 	width: 40%;
 	min-height: 50vh;
+
+	overflow-y: auto;
 
 	padding: 1rem;
 
@@ -40,7 +42,9 @@ export const CustomPopup = styled.div<{ active: string }>`
 		z-index: 99;
 
 		width: 100%;
-		height: 100%;
+		height: 100vh;
+
+		top: 0;
 
 		border-radius: 0;
 

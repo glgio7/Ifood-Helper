@@ -1,7 +1,10 @@
 import styled from "styled-components";
 
 export const Loading = styled.div`
-	min-height: calc(100vh - var(--header-height));
+	width: 100%;
+	height: 100%;
+
+	z-index: 10;
 
 	background-color: #dd2222;
 
@@ -9,6 +12,7 @@ export const Loading = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+
 	color: #fff;
 
 	span {

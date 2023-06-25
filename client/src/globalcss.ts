@@ -16,7 +16,8 @@ export const GlobalCSS = createGlobalStyle`
 
 }
 :root {
-  --header-height: 60px;
+  --header-height: 54px;
+  --footer-height: 28px;
 }
 
 

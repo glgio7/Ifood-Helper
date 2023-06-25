@@ -1,13 +1,9 @@
 import styled from "styled-components";
 
 export const Home = styled.main`
-	min-height: calc(100vh - 64px);
 	width: 100%;
+	height: calc(100vh - (var(--header-height) + var(--footer-height)));
 
-	position: relative;
-`;
-
-export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -15,8 +11,9 @@ export const Container = styled.div`
 
 	position: relative;
 
+
 	.leaftlet-container {
-		height: calc(100vh - 64px);
+		height: 100%;
 		width: 100%;
 		z-index: 5;
 	}

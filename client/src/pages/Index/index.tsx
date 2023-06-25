@@ -20,7 +20,7 @@ const Home = () => {
 		<S.Home>
 			{!currentLocation && <Loading />}
 			{currentLocation && (
-				<S.Container>
+				<>
 					<MapContainer
 						center={currentLocation.position}
 						zoom={50}
@@ -63,7 +63,7 @@ const Home = () => {
 					<Popup />
 
 					{loadingNewMarker && <LoadingNewMarker position={markerPosition} />}
-				</S.Container>
+				</>
 			)}
 		</S.Home>
 	);
