@@ -45,8 +45,12 @@ export const Header = styled.header`
 
 		h1 {
 			justify-content: center;
+		
 			width: 100%;
+		
 			font-size: 1.75rem;
+		
+			margin-right: initial;
 		}
 
 		.menu-btn {
