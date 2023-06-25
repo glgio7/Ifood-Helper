@@ -5,18 +5,19 @@ import {
 	IAuthWithEmail,
 	IAuthWithToken,
 } from "../use-cases/users/auth-user/protocols";
-import { IUpdateScore, IUsersRepository } from "./protocols";
+import { IUsersRepository } from "./protocols";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { IUpdateScore } from "../use-cases/users/update-user/protocols";
 
 export class UsersRepository implements IUsersRepository {
-	async updateScore(params: IUpdateScore): Promise<Omit<IUser, "password">> {
+	async updateScore(params: IUpdateScore): Promise<IUser> {
 		const { owner, action } = params;
 
 		const user = await MongoClientUsers.db
 			.collection<IUser>("users")
 			.findOneAndUpdate(
-				{ author: owner },
+				{ username: owner },
 				{ $inc: { score: action === "increase" ? 1 : -1 } },
 				{ returnDocument: "after" }
 			);
