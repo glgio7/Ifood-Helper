@@ -139,6 +139,31 @@
 						}
 					}
 				}
+			},
+			"patch": {
+				"tags": ["Markers"],
+				"description": "Insere um voto, positivo ou negativo, ao marcador.",
+				"requestBody": {
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Vote-marker"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Dados do marcador votado.",
+						"content": {
+							"application/json": {
+								"schema": {
+									"$ref": "#/components/schemas/IMarker"
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 	},
@@ -242,6 +267,37 @@
 						}
 					},
 					"comment": {
+						"type": "string"
+					},
+					"votes": {
+						"type": "number"
+					},
+					"upvoters": {
+						"type": "array"
+					},
+					"downvoters": {
+						"type": "array"
+					}
+				}
+			},
+			"Vote-marker": {
+				"type": "object",
+				"properties": {
+					"position": {
+						"type": "object",
+						"properties": {
+							"lat": {
+								"type": "number"
+							},
+							"lng": {
+								"type": "number"
+							}
+						}
+					},
+					"action": {
+						"type": "string"
+					},
+					"author": {
 						"type": "string"
 					}
 				}
