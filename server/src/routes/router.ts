@@ -1,4 +1,4 @@
-import { Router, Request, Response, NextFunction } from "express";
+import express, { Router } from "express";
 import { MarkersRoute } from "./markers";
 import { AuthRoutes } from "./users";
 import * as swaggerDocument from "../../swagger.json";
@@ -12,10 +12,7 @@ export const createRoutes = () => {
 
 	router.use(
 		"/swagger-ui.css",
-		(req: Request, res: Response, next: NextFunction) => {
-			res.set("Content-Type", "text/css");
-			next();
-		}
+		express.static("node_modules/swagger-ui-dist/swagger-ui.css")
 	);
 
 	router.use(
