@@ -77,7 +77,7 @@ const MarkersProvider = ({ children }: MarkersProvidersProps) => {
 						return res.data;
 					});
 
-					setMarkerDetails(response)
+				setMarkerDetails(response);
 			} catch (error) {
 				if (error instanceof Error) {
 					alert(error.message);
@@ -100,7 +100,18 @@ const MarkersProvider = ({ children }: MarkersProvidersProps) => {
 	useEffect(() => {
 		updateCurrentLocation();
 
-		if (gpsTracking) {
+		const stringGps = localStorage.getItem("gpstracking");
+		const gpsPrefs: boolean = stringGps && JSON.parse(stringGps);
+
+
+		if(!gpsTracking){
+			localStorage.removeItem("gpstracking")
+		}
+
+		if (gpsTracking || gpsPrefs) {
+			localStorage.setItem("gpstracking", JSON.stringify(true));
+			setGpsTracking(gpsPrefs);
+
 			const interval = setInterval(updateCurrentLocation, 3000);
 
 			return () => {
