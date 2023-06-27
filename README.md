@@ -7,7 +7,7 @@ REQUISITOS FUNCIONAIS:
 - Integração com API de Geolocalização. - Adicionado!
 - O usuario poderá ou não, compartilhar sua localização atual. - Adicionado!
 - O usuario deverá realizar cadastro para uso da plataforma. - Adicionado!
-- O usuario terá uma pontuação mediante a interação com app.
+- O usuario terá uma pontuação mediante a interação com app. - Adicionado!
 
 - Marcadores
 
@@ -16,8 +16,8 @@ REQUISITOS FUNCIONAIS:
 - Um marcador informa o nome do criador, horário criado e o tipo de alerta, com um comentário. - Adicionado!
 
 - Um marcador terá 2 opções de avaliações:
-- Like - Somará 1 ponto ao score do usuário.
-- Dislike - Somará um ponto a pontuação de dislikes do marcador, ao atingir 3 dislikes o marcador será excluído da lista.
+- Like - Somará 1 ponto ao score do usuário. - Adicionado!
+- Dislike - Somará um ponto a pontuação de dislikes do marcador, ao atingir 3 dislikes o marcador será excluído da lista. - Adicionado!
 
   
 - Os tipos de alertas a serem adicionadas serão: - Adicionado!
