@@ -25,6 +25,7 @@ export const createRoutes = () => {
 		swaggerUi.setup(swaggerDocument, {
 			customSiteTitle: "Ifood Helper | API Doc",
 			customfavIcon: "https://ifoodhelper.vercel.app/favicon.png",
+			customCssUrl: "https://api-ifoodhelper.vercel.app/swagger-ui.css"
 		})
 	);
 
